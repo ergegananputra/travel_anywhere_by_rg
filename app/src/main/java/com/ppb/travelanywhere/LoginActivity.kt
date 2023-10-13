@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.ppb.travelanywhere.databinding.ActivityLoginBinding
@@ -42,6 +43,11 @@ class LoginActivity : AppCompatActivity() {
                             val intentToMainActivity = Intent(this@LoginActivity, MainActivity::class.java)
                             intentToMainActivity.putExtra(RegisterActivity.EXTRA_USERNAME, username)
                             setResult(Activity.RESULT_OK, intentToMainActivity)
+
+                            // clear username dan password
+                            editTextUsernameEmail.text.clear()
+                            editTextPassword.text.clear()
+
                             launcher.launch(intentToMainActivity)
 
 
@@ -55,5 +61,9 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    fun goToRegister(view: View) {
+        finish()
     }
 }

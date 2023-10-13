@@ -7,6 +7,7 @@ import android.content.Intent
 import android.icu.util.Calendar
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import com.ppb.travelanywhere.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
@@ -61,8 +62,7 @@ class RegisterActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
                     val yearOfBirth = dateOfBirthSplit[2].toInt()
                     val age = currentYear - yearOfBirth
                     if (age < 15) {
-                        editTextDataOfBirth.error = "Umur anda belum mencukupi"
-                        return@setOnClickListener
+                        Snackbar.make(it, "Umur anda belum mencukupi, Mohon panggil orangtua Anda", Snackbar.LENGTH_LONG).show()
                     }
                     else {
                         // Masuk ke login page

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.ppb.travelanywhere.databinding.ActivityMainBinding
 
@@ -69,8 +70,14 @@ class MainActivity : AppCompatActivity() {
                 // Tampilkan Card
                 binding.cardViewLastTrip.visibility = View.VISIBLE
 
-                binding.textAsal.text = stasiunKeberangkatan
-                binding.textTujuan.text = stasiunTujuan
+                val keberangkatan = stasiunKeberangkatan.split(", ")
+                binding.kotaAsal.text = keberangkatan[0]
+                binding.stasiunAsal.text = keberangkatan[1]
+
+                val tujuan = stasiunTujuan.split(", ")
+                binding.kotaTujuan.text = tujuan[0]
+                binding.stasiunTujuan.text = tujuan[1]
+
                 binding.textKeretaTanggal.text = tanggalKeberangkatan
                 binding.textKeretaNama.text = namaKereta
                 binding.textKeretaKelas.text = kelasKereta
@@ -180,5 +187,23 @@ class MainActivity : AppCompatActivity() {
 
 
         }
+    }
+
+    fun logout(view: View) {
+        val alertDialogBuilder = AlertDialog.Builder(this)
+
+        alertDialogBuilder.setTitle("Log Out")
+        alertDialogBuilder.setMessage("Are you sure you want to log out?")
+
+        alertDialogBuilder.setPositiveButton("Yes") { dialog, which ->
+            finish()
+        }
+
+        alertDialogBuilder.setNegativeButton("No") { dialog, which ->
+            // Dismiss the alert dialog.
+        }
+
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
     }
 }
