@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button"
+        android:id="@+id/button_pesan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
@@ -124,7 +124,7 @@
                     app:cardCornerRadius="8dp"
                     android:elevation="8dp"
                     app:cardElevation="8dp"
-                    android:visibility="visible"
+                    android:visibility="gone"
 
                     app:cardBackgroundColor="@color/card_color"
                     >
@@ -217,7 +217,7 @@
                             android:layout_height="wrap_content"
                             app:layout_constraintBottom_toBottomOf="@+id/imageView3"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:srcCompat="@drawable/baseline_location_city_24" />
+                            android:src="@drawable/baseline_location_city_24" />
 
                         <TextView
                             android:id="@+id/text_asal"
