@@ -14,7 +14,6 @@ class RegisterActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
     companion object {
         const val EXTRA_USERNAME = "extra_username"
         const val EXTRA_EMAIL = "extra_email"
-        const val EXTRA_PHONE = "extra_phone"
         const val EXTRA_PASSWORD = "extra_password"
     }
 

@@ -70,6 +70,7 @@
                     android:layout_height="match_parent"/>
 
                 <TextView
+                    android:id="@+id/text_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Hi, username!"
@@ -100,14 +101,30 @@
                     android:textColor="@color/white"
                     android:textSize="35sp" />
 
+                <TextView
+                    android:id="@+id/text_no_trip_yet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:visibility="visible"
+
+                    android:text="Belum ada trip saat ini"
+                    android:fontFamily="@font/open_sans"
+                    android:textColor="@color/white_50"
+
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+
 
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/card_view_last_trip"
                     android:layout_width="match_parent"
                     android:layout_height= "wrap_content"
                     app:cardCornerRadius="8dp"
                     android:elevation="8dp"
                     app:cardElevation="8dp"
+                    android:visibility="visible"
 
                     app:cardBackgroundColor="@color/card_color"
                     >
