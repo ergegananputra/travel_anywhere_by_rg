@@ -1,4 +1,4 @@
-package com.ppb.travelanywhere
+package com.ppb.travelanywhere.authenticate
 
 import android.app.Activity
 import android.content.Intent
@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import com.ppb.travelanywhere.MainActivity
 import com.ppb.travelanywhere.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {

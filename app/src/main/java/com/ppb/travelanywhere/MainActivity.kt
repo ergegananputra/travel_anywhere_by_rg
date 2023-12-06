@@ -1,14 +1,15 @@
 package com.ppb.travelanywhere
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
+import com.ppb.travelanywhere.authenticate.RegisterActivity
 import com.ppb.travelanywhere.databinding.ActivityMainBinding
+import com.ppb.travelanywhere.pesan.PesanActivity
 
 class MainActivity : AppCompatActivity() {
 

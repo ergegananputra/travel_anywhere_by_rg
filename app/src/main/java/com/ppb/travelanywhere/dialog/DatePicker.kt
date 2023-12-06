@@ -1,4 +1,4 @@
-package com.ppb.travelanywhere
+package com.ppb.travelanywhere.dialog
 
 import android.app.DatePickerDialog
 import android.app.Dialog

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:windowFullscreen="true"
-    tools:context=".PesanActivity">
+    tools:context=".pesan.PesanActivity">
 
     <include
         android:id="@+id/app_header"

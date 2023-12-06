@@ -1,4 +1,4 @@
-package com.ppb.travelanywhere
+package com.ppb.travelanywhere.authenticate
 
 
 
@@ -8,6 +8,7 @@ import android.icu.util.Calendar
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
+import com.ppb.travelanywhere.dialog.DatePicker
 import com.ppb.travelanywhere.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {

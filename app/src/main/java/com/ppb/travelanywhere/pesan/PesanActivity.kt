@@ -1,4 +1,4 @@
-package com.ppb.travelanywhere
+package com.ppb.travelanywhere.pesan
 
 import android.app.DatePickerDialog
 import android.content.Intent
@@ -20,10 +20,12 @@ import com.ppb.travelanywhere.MainActivity.Companion.EXTRA_PAKET_4
 import com.ppb.travelanywhere.MainActivity.Companion.EXTRA_PAKET_5
 import com.ppb.travelanywhere.MainActivity.Companion.EXTRA_PAKET_6
 import com.ppb.travelanywhere.MainActivity.Companion.EXTRA_PAKET_7
-import com.ppb.travelanywhere.RegisterActivity.Companion.EXTRA_USERNAME
+import com.ppb.travelanywhere.authenticate.RegisterActivity.Companion.EXTRA_USERNAME
 import com.ppb.travelanywhere.MainActivity.Companion.EXTRA_STASIUN_KEBRANGKATAN
 import com.ppb.travelanywhere.MainActivity.Companion.EXTRA_STASIUN_TUJUAN
 import com.ppb.travelanywhere.MainActivity.Companion.EXTRA_TANGGAL_KEBERANGKATAN
+import com.ppb.travelanywhere.R
+import com.ppb.travelanywhere.authenticate.RegisterActivity
 import com.ppb.travelanywhere.databinding.ActivityPesanBinding
 
 class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
@@ -68,7 +70,7 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
             // Tanggal Keberangkatan
             buttonPilihTanggal.setOnClickListener {
-                val datePickerDialog = DatePicker()
+                val datePickerDialog = com.ppb.travelanywhere.dialog.DatePicker()
                 datePickerDialog.show(supportFragmentManager, "date picker")
             }
 
