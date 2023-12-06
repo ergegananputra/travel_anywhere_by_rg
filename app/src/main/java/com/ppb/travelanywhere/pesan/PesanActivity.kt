@@ -20,12 +20,10 @@ import com.ppb.travelanywhere.MainActivity.Companion.EXTRA_PAKET_4
 import com.ppb.travelanywhere.MainActivity.Companion.EXTRA_PAKET_5
 import com.ppb.travelanywhere.MainActivity.Companion.EXTRA_PAKET_6
 import com.ppb.travelanywhere.MainActivity.Companion.EXTRA_PAKET_7
-import com.ppb.travelanywhere.authenticate.RegisterActivity.Companion.EXTRA_USERNAME
 import com.ppb.travelanywhere.MainActivity.Companion.EXTRA_STASIUN_KEBRANGKATAN
 import com.ppb.travelanywhere.MainActivity.Companion.EXTRA_STASIUN_TUJUAN
 import com.ppb.travelanywhere.MainActivity.Companion.EXTRA_TANGGAL_KEBERANGKATAN
 import com.ppb.travelanywhere.R
-import com.ppb.travelanywhere.authenticate.RegisterActivity
 import com.ppb.travelanywhere.databinding.ActivityPesanBinding
 
 class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
@@ -248,27 +246,27 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
                     && kelasKereta != "Pilih"
                 ) {
 
+//
+//
+//                    // Balik ke MainActivity
+//                    val username = intent.getStringExtra(RegisterActivity.EXTRA_USERNAME)
+//                    val intentToMainActivity = Intent()
+//                    intentToMainActivity.putExtra(EXTRA_USERNAME, username)
+//                    intentToMainActivity.putExtra(EXTRA_STASIUN_KEBRANGKATAN, stasiunKeberangkatan)
+//                    intentToMainActivity.putExtra(EXTRA_STASIUN_TUJUAN, stasiunTujuan)
+//                    intentToMainActivity.putExtra(EXTRA_TANGGAL_KEBERANGKATAN, tanggalKeberangkatan)
+//                    intentToMainActivity.putExtra(EXTRA_NAMA_KERETA, namaKereta)
+//                    intentToMainActivity.putExtra(EXTRA_KELAS_KERETA, kelasKereta)
+//                    intentToMainActivity.putExtra(EXTRA_PAKET_1, boolPaket1)
+//                    intentToMainActivity.putExtra(EXTRA_PAKET_2, boolPaket2)
+//                    intentToMainActivity.putExtra(EXTRA_PAKET_3, boolPaket3)
+//                    intentToMainActivity.putExtra(EXTRA_PAKET_4, boolPaket4)
+//                    intentToMainActivity.putExtra(EXTRA_PAKET_5, boolPaket5)
+//                    intentToMainActivity.putExtra(EXTRA_PAKET_6, boolPaket6)
+//                    intentToMainActivity.putExtra(EXTRA_PAKET_7, boolPaket7)
+//                    intentToMainActivity.putExtra(EXTRA_HARGA, totalHarga)
 
-
-                    // Balik ke MainActivity
-                    val username = intent.getStringExtra(RegisterActivity.EXTRA_USERNAME)
-                    val intentToMainActivity = Intent()
-                    intentToMainActivity.putExtra(EXTRA_USERNAME, username)
-                    intentToMainActivity.putExtra(EXTRA_STASIUN_KEBRANGKATAN, stasiunKeberangkatan)
-                    intentToMainActivity.putExtra(EXTRA_STASIUN_TUJUAN, stasiunTujuan)
-                    intentToMainActivity.putExtra(EXTRA_TANGGAL_KEBERANGKATAN, tanggalKeberangkatan)
-                    intentToMainActivity.putExtra(EXTRA_NAMA_KERETA, namaKereta)
-                    intentToMainActivity.putExtra(EXTRA_KELAS_KERETA, kelasKereta)
-                    intentToMainActivity.putExtra(EXTRA_PAKET_1, boolPaket1)
-                    intentToMainActivity.putExtra(EXTRA_PAKET_2, boolPaket2)
-                    intentToMainActivity.putExtra(EXTRA_PAKET_3, boolPaket3)
-                    intentToMainActivity.putExtra(EXTRA_PAKET_4, boolPaket4)
-                    intentToMainActivity.putExtra(EXTRA_PAKET_5, boolPaket5)
-                    intentToMainActivity.putExtra(EXTRA_PAKET_6, boolPaket6)
-                    intentToMainActivity.putExtra(EXTRA_PAKET_7, boolPaket7)
-                    intentToMainActivity.putExtra(EXTRA_HARGA, totalHarga)
-
-                    setResult(RESULT_OK, intentToMainActivity)
+//                    setResult(RESULT_OK, intentToMainActivity)
                     finish()
 
                 } else {

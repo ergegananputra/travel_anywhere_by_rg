@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.ppb.travelanywhere.authenticate.RegisterActivity
 import com.ppb.travelanywhere.databinding.ActivityMainBinding
 import com.ppb.travelanywhere.pesan.PesanActivity
 
@@ -38,7 +37,7 @@ class MainActivity : AppCompatActivity() {
             val data = result.data
 
             // dari login
-            val username = data?.getStringExtra(RegisterActivity.EXTRA_USERNAME)
+//            val username = data?.getStringExtra(RegisterActivity.EXTRA_USERNAME)
 
             // dari pesan
             val stasiunKeberangkatan = data?.getStringExtra(EXTRA_STASIUN_KEBRANGKATAN)
@@ -57,7 +56,7 @@ class MainActivity : AppCompatActivity() {
             val harga = data?.getIntExtra(EXTRA_HARGA, 0)
 
             // set up
-            binding.textUsername.text = "Hi, ${username}!"
+//            binding.textUsername.text = "Hi, ${username}!"
 
             if (stasiunKeberangkatan != null
                 && stasiunTujuan != null
@@ -151,43 +150,43 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        with(binding){
-
-            // set nama user
-            val username = intent.getStringExtra(RegisterActivity.EXTRA_USERNAME)
-            binding.textUsername.text = "Hi, ${username}!"
-
-            // button pesan
-            binding.buttonPesan.setOnClickListener {
-                val intentToPesanActivity = Intent(this@MainActivity, PesanActivity::class.java)
-                intentToPesanActivity.putExtra(RegisterActivity.EXTRA_USERNAME, username)
-                launcher.launch(intentToPesanActivity)
-            }
-
-            // kalender
-            binding.calendarView.setOnDateChangeListener() {
-                    view,
-                    year,
-                    month,
-                    dayOfMonth ->
-
-                if (listTripTanggal.contains("$dayOfMonth/${month+1}/$year")) {
-                    Toast.makeText(
-                        this@MainActivity,
-                        "Anda sudah pernah memesan pada tanggal $dayOfMonth/${month+1}/$year",
-                        Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(
-                        this@MainActivity,
-                        "Anda belum pernah memesan pada tanggal $dayOfMonth/${month+1}/$year",
-                        Toast.LENGTH_SHORT).show()
-                }
-            }
-
-
-
-
-        }
+//        with(binding){
+//
+//            // set nama user
+//            val username = intent.getStringExtra(RegisterActivity.EXTRA_USERNAME)
+//            binding.textUsername.text = "Hi, ${username}!"
+//
+//            // button pesan
+//            binding.buttonPesan.setOnClickListener {
+//                val intentToPesanActivity = Intent(this@MainActivity, PesanActivity::class.java)
+//                intentToPesanActivity.putExtra(RegisterActivity.EXTRA_USERNAME, username)
+//                launcher.launch(intentToPesanActivity)
+//            }
+//
+//            // kalender
+//            binding.calendarView.setOnDateChangeListener() {
+//                    view,
+//                    year,
+//                    month,
+//                    dayOfMonth ->
+//
+//                if (listTripTanggal.contains("$dayOfMonth/${month+1}/$year")) {
+//                    Toast.makeText(
+//                        this@MainActivity,
+//                        "Anda sudah pernah memesan pada tanggal $dayOfMonth/${month+1}/$year",
+//                        Toast.LENGTH_SHORT).show()
+//                } else {
+//                    Toast.makeText(
+//                        this@MainActivity,
+//                        "Anda belum pernah memesan pada tanggal $dayOfMonth/${month+1}/$year",
+//                        Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//
+//
+//
+//
+//        }
     }
 
     fun logout(view: View) {
