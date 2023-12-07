@@ -373,9 +373,10 @@
 
         <Button
             android:id="@+id/button_active"
-            android:layout_width="130dp"
+            android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:backgroundTint="?attr/colorTertiaryContainer"
+            android:textAppearance="@style/TextAppearance.MyApp.LabelSmall"
             android:text="Active"
             android:textColor="?attr/colorOnTertiaryContainer"
             android:visibility="visible"
@@ -385,10 +386,11 @@
 
         <Button
             android:id="@+id/button_process"
-            android:layout_width="130dp"
+            android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:backgroundTint="?attr/colorSecondaryContainer"
-            android:text="in Process"
+            android:text="Waiting"
+            android:textAppearance="@style/TextAppearance.MyApp.LabelSmall"
             android:textColor="?attr/colorOnSecondaryContainer"
             android:visibility="visible"
             app:layout_constraintEnd_toStartOf="@+id/button_active"
