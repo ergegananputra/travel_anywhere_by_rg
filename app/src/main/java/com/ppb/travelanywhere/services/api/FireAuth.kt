@@ -90,6 +90,55 @@ class FireAuth : FireConsole() {
         }
     }
 
+    suspend fun getUserRole(id: String) : String {
+        return suspendCoroutine { continuation ->
+            usersRef.whereEqualTo(field_ID, id).get(Source.SERVER).addOnSuccessListener { documents ->
+                if (documents.isEmpty) {
+                    Log.w("FireAuth", "User not exist")
+                    continuation.resume("")
+                } else {
+                    val user = documents.toObjects(User::class.java)[0]
+                    continuation.resume(user.role)
+                }
+            }.addOnFailureListener { exception ->
+                Log.e("FireAuth", "Error getting user role :", exception)
+                continuation.resumeWithException(exception)
+            }
+        }
+    }
+
+
+    /**
+     *  Return Pair of Id and Role
+     */
+    suspend fun getUserContext(username: String, email: String) : Pair<String?, String?> {
+        return suspendCoroutine { continuation ->
+            usersRef.whereEqualTo(field_username, username).get(Source.SERVER).addOnSuccessListener { resultUsername ->
+                if (resultUsername.isEmpty) {
+                    usersRef.whereEqualTo(field_email, email).get(Source.SERVER).addOnSuccessListener { resultEmail ->
+                        if (resultEmail.isEmpty) {
+                            Log.w("FireAuth", "User not exist")
+                            continuation.resume(Pair(null, null))
+                        } else {
+                            val user = resultEmail.toObjects(User::class.java)[0]
+                            continuation.resume(Pair(user.id, user.role))
+                        }
+                    }.addOnFailureListener {
+                        Log.e("FireAuth", "Error getting user id from email:", it)
+                        continuation.resumeWithException(it)
+                    }
+                } else {
+                    Log.d("FireAuth", "User exist")
+                    val user = resultUsername.toObjects(User::class.java)[0]
+                    continuation.resume(Pair(user.id, user.role))
+                }
+            }.addOnFailureListener {
+                Log.e("FireAuth", "Error getting user id from username:", it)
+                continuation.resumeWithException(it)
+            }
+        }
+    }
+
 
 
     /**

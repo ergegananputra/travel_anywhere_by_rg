@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground"
+    tools:context=".dashboard.DashboardFragment">
+
+
+    <ImageView
+        android:id="@+id/button_profil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/outline_account_circle_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="?attr/colorSecondary" />
+
+
+    <TextView
+        android:id="@+id/text_username"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+
+        android:layout_marginEnd="32dp"
+        android:text="Hi, username!"
+        android:textAppearance="@style/TextAppearance.MyApp.HeadlineSmall"
+
+        android:textColor="?attr/colorSecondary"
+        app:layout_constraintBottom_toBottomOf="@+id/button_profil"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_profil"
+        app:layout_constraintTop_toTopOf="@+id/button_profil" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/extendedFloatingActionButton"
+        style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Primary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:text="Pesan Tiket"
+        android:textColor="?attr/colorOnPrimaryContainer"
+        app:backgroundTint="?attr/colorPrimaryContainer"
+        app:icon="@drawable/baseline_add_shopping_cart_24"
+        app:iconTint="?attr/colorOnPrimaryContainer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fadingEdgeLength="24dp"
+        android:overScrollMode="always"
+        android:requiresFadingEdge="vertical"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_profil">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_profil">
+
+            <TextView
+                android:id="@+id/text_next_trip"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+
+                android:layout_marginEnd="24dp"
+
+                android:text="Next Trip"
+                android:textAppearance="@style/TextAppearance.MyApp.HeadlineLarge"
+                android:textColor="?attr/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <include
+                android:id="@+id/container_next_trip"
+                layout="@layout/card_ticket_trip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_next_trip" />
+
+            <TextView
+                android:id="@+id/text_latest_ticket"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+
+                android:layout_marginEnd="24dp"
+
+                android:text="Latest Ticket"
+                android:textAppearance="@style/TextAppearance.MyApp.HeadlineLarge"
+                android:textColor="?attr/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/container_next_trip" />
+
+            <include
+                android:id="@+id/container_last_trip"
+                layout="@layout/card_ticket_trip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_latest_ticket" />
+
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="128dp"
+                android:src="@drawable/baseline_expand_more_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/container_last_trip"
+                app:tint="?attr/colorOnBackground" />
+
+
+            <TextView
+                android:id="@+id/text_dive_deeper"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="Dive Deeper"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.MyApp.HeadlineLarge"
+                android:textColor="?attr/colorPrimary"
+                app:layout_constraintEnd_toEndOf="@+id/text_latest_ticket"
+                app:layout_constraintStart_toStartOf="@+id/text_latest_ticket"
+                app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+
+            <TextView
+                android:id="@+id/text_slogan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="into the memories"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.MyApp.HeadlineMedium"
+                android:textColor="?attr/colorSecondary"
+                app:layout_constraintEnd_toEndOf="@+id/text_dive_deeper"
+                app:layout_constraintStart_toStartOf="@+id/text_dive_deeper"
+                app:layout_constraintTop_toBottomOf="@+id/text_dive_deeper" />
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="32dp"
+                android:elevation="8dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="@+id/text_dive_deeper"
+                app:layout_constraintStart_toStartOf="@+id/text_dive_deeper"
+                app:layout_constraintTop_toBottomOf="@+id/text_slogan">
+
+                <CalendarView
+                    android:id="@+id/calendarView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/colorSurfaceContainer" />
+
+            </androidx.cardview.widget.CardView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

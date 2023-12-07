@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height= "wrap_content"
+    android:id="@+id/card_view_last_trip"
+    app:cardCornerRadius="16dp"
+    android:elevation="4dp"
+    android:visibility="visible"
+    app:cardBackgroundColor="?attr/colorSurfaceContainer"
+    app:strokeWidth="0dp"
+    android:layout_marginBottom="24dp"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="22dp"
+        android:paddingHorizontal="25dp"
+        >
+
+
+        <TextView
+            android:id="@+id/text_kereta_nama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:text="Kereta Nama Text View"
+            android:textAppearance="@style/TextAppearance.MyApp.TitleLarge"
+            android:textColor="?attr/colorOnSurface"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_kereta_kelas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kereta Kelas"
+            android:textAppearance="@style/TextAppearance.MyApp.LabelMedium"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_kereta_nama" />
+
+        <TextView
+            android:id="@+id/text_total_harga"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="?attr/colorOnPrimaryContainer"
+            android:textAppearance="@style/TextAppearance.MyApp.TitleMedium"
+            android:text="Rp0 Total Harga Tiket Kereta"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_kereta_kelas" />
+
+
+        <TextView
+            android:id="@+id/text_kereta_tanggal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="1 Januari 1970"
+            android:textAppearance="@style/TextAppearance.MyApp.TitleSmall"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            app:layout_constraintBottom_toTopOf="@+id/text_kereta_nama"
+            app:layout_constraintEnd_toStartOf="@+id/button_active"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_marginTop="64dp"
+            android:src="@drawable/rounded_rectangle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_total_harga"
+            app:tint="?attr/colorSecondary" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            app:tint="?attr/colorSecondary"
+            app:layout_constraintBottom_toTopOf="@+id/line"
+            app:layout_constraintStart_toStartOf="@+id/line"
+            android:src="@drawable/baseline_apartment_24" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:tint="?attr/colorSecondary"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/baseline_location_city_24" />
+
+        <TextView
+            android:id="@+id/text_asal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Asal"
+            android:textColor="?attr/colorOnSurface"
+            android:layout_marginTop="10dp"
+            android:textAppearance="@style/TextAppearance.MyApp.LabelMedium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line" />
+
+        <TextView
+            android:id="@+id/text_tujuan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tujuan"
+            android:textAppearance="@style/TextAppearance.MyApp.LabelMedium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/text_asal" />
+
+        <TextView
+            android:id="@+id/kota_asal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
+            android:text="Yogyakarta"
+            android:textColor="?attr/colorOnSurface"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_asal" />
+
+        <TextView
+            android:id="@+id/stasiun_asal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
+            android:text="Tugu"
+            android:textColor="?attr/colorOnSurface"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/kota_asal" />
+
+        <TextView
+            android:id="@+id/kota_tujuan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
+            android:text="Surabaya"
+            android:textColor="?attr/colorOnSurface"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_tujuan" />
+
+        <TextView
+            android:id="@+id/stasiun_tujuan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
+            android:text="Gubeng"
+            android:textColor="?attr/colorOnSurface"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/kota_tujuan" />
+
+        <TextView
+            android:id="@+id/text_paket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:textAppearance="@style/TextAppearance.MyApp.TitleLarge"
+            android:text="Paket"
+            android:textColor="?attr/colorOnPrimaryContainer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/stasiun_asal" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@+id/text_paket">
+
+            <LinearLayout
+                android:id="@+id/paket_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    app:tint="?attr/colorSecondary"
+                    android:src="@drawable/outline_vrpano_24"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
+                    android:text="Pemandangan Panorama"
+                    android:textColor="?attr/colorSecondary"
+                     />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/paket_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    app:tint="?attr/colorSecondary"
+                    android:src="@drawable/outline_local_cafe_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
+                    android:text="Minuman Signature"
+                    android:textColor="?attr/colorSecondary"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/paket_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="6dp"
+                android:visibility="visible"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    app:tint="?attr/colorSecondary"
+                    android:src="@drawable/outline_brunch_dining_24"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
+                    android:text="Makanan Berat"
+                    android:textColor="?attr/colorSecondary"
+                    />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/paket_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="6dp"
+                android:visibility="visible"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    app:tint="?attr/colorSecondary"
+                    android:src="@drawable/outline_movie_24"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
+                    android:text="Akses Film"
+                    android:textColor="?attr/colorSecondary"
+                    />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/paket_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="6dp"
+                android:visibility="visible"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    app:tint="?attr/colorSecondary"
+                    android:src="@drawable/outline_fastfood_24"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
+                    android:text="Makanan Ringan"
+                    android:textColor="?attr/colorSecondary"
+                    />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/paket_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="6dp"
+                android:visibility="visible"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    app:tint="?attr/colorSecondary"
+                    android:src="@drawable/flowsheet"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
+                    android:text="Jaminan Duduk Dekat Jendela"
+                    android:textColor="?attr/colorSecondary"
+                    />
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/paket_7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="6dp"
+                android:visibility="visible"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    app:tint="?attr/colorSecondary"
+                    android:src="@drawable/outline_accessible_24"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
+                    android:text="Berkebutuhan Khusus"
+                    android:textColor="?attr/colorSecondary"
+                    />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/paket_kosong"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="50dp"
+                android:text="Tidak ada paket yang dipilih"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
+                android:textColor="?attr/colorOnPrimaryContainer"
+                />
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button_active"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:backgroundTint="?attr/colorTertiaryContainer"
+            android:text="Active"
+            android:textColor="?attr/colorOnTertiaryContainer"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <Button
+            android:id="@+id/button_process"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:backgroundTint="?attr/colorSecondaryContainer"
+            android:text="in Process"
+            android:textColor="?attr/colorOnSecondaryContainer"
+            android:visibility="visible"
+            app:layout_constraintEnd_toStartOf="@+id/button_active"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/baseline_access_time_24"
+            app:layout_constraintBottom_toTopOf="@+id/text_kereta_nama"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="?attr/colorOnSurfaceVariant" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</com.google.android.material.card.MaterialCardView>

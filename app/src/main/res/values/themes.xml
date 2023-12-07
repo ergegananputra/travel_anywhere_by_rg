@@ -117,10 +117,10 @@
         <item name="fontFamily">@font/open_sans_bold</item>
     </style>
     <style name="TextAppearance.MyApp.DisplayMedium" parent="TextAppearance.Material3.DisplayMedium">
-        <item name="fontFamily">@font/open_sans_semibold</item>
+        <item name="fontFamily">@font/open_sans_bold</item>
     </style>
     <style name="TextAppearance.MyApp.DisplaySmall" parent="TextAppearance.Material3.DisplaySmall">
-        <item name="fontFamily">@font/open_sans</item>
+        <item name="fontFamily">@font/open_sans_bold</item>
     </style>
 
     <!--  Headline  -->
@@ -144,7 +144,7 @@
     </style>
 
     <style name="TextAppearance.MyApp.TitleMedium" parent="TextAppearance.Material3.TitleMedium">
-        <item name="fontFamily">@font/open_sans_semibold</item>
+        <item name="fontFamily">@font/open_sans_bold</item>
     </style>
 
     <style name="TextAppearance.MyApp.TitleSmall" parent="TextAppearance.Material3.TitleSmall">
@@ -154,7 +154,7 @@
     <!--  Body  -->
 
     <style name="TextAppearance.MyApp.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
-        <item name="fontFamily">@font/open_sans_semibold</item>
+        <item name="fontFamily">@font/open_sans</item>
     </style>
 
     <style name="TextAppearance.MyApp.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
@@ -172,11 +172,11 @@
     </style>
 
     <style name="TextAppearance.MyApp.LabelMedium" parent="TextAppearance.Material3.LabelMedium">
-        <item name="fontFamily">@font/open_sans</item>
+        <item name="fontFamily">@font/open_sans_semibold</item>
     </style>
 
     <style name="TextAppearance.MyApp.LabelSmall" parent="TextAppearance.Material3.LabelSmall">
-        <item name="fontFamily">@font/open_sans</item>
+        <item name="fontFamily">@font/open_sans_semibold</item>
     </style>
 
     <style name="DesignSystem.TextInputEditText.Base" parent="ThemeOverlay.Material3.TextInputEditText">

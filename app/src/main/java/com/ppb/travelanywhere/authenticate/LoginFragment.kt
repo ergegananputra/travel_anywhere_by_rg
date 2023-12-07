@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +11,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.ppb.travelanywhere.MainActivity
-import com.ppb.travelanywhere.R
-import com.ppb.travelanywhere.databinding.FragmentLoginBinding
 import com.ppb.travelanywhere.services.ApplicationPreferencesManager
 import com.ppb.travelanywhere.services.api.FireAuth
 import kotlinx.coroutines.Dispatchers
@@ -24,7 +21,7 @@ import kotlinx.coroutines.withContext
 class LoginFragment : Fragment() {
 
     private val binding by lazy{
-        FragmentLoginBinding.inflate(layoutInflater)
+       com.ppb.travelanywhere.databinding.FragmentLoginBinding.inflate(layoutInflater)
     }
 
     private val fireAuth by lazy {
@@ -82,7 +79,14 @@ class LoginFragment : Fragment() {
     private suspend fun login(inputUser: String, password: String) {
         withContext(Dispatchers.IO) {
             if(fireAuth.login(inputUser, inputUser, password)) {
-                ApplicationPreferencesManager(requireContext()).saveUsernameId(fireAuth.getUserId(inputUser, inputUser))
+                val (id, role) = fireAuth.getUserContext(inputUser, inputUser)
+
+                if (id == null || role == null) {
+                    Toast.makeText(requireContext(), "Username atau password salah", Toast.LENGTH_SHORT).show()
+                    return@withContext
+                }
+
+                ApplicationPreferencesManager(requireContext()).saveUsernameId(id, role)
                 val intentToMainActivity = Intent(requireContext(), MainActivity::class.java)
                 startActivity(intentToMainActivity)
                 requireActivity().finish()

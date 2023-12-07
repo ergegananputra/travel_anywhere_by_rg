@@ -1,14 +1,11 @@
 package com.ppb.travelanywhere.authenticate
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import androidx.viewpager2.widget.ViewPager2
 import com.ppb.travelanywhere.MainActivity
-import com.ppb.travelanywhere.R
 import com.ppb.travelanywhere.databinding.ActivityWelcomeBinding
 import com.ppb.travelanywhere.dialog.WelcomeSheetFragment
 import com.ppb.travelanywhere.services.ApplicationPreferencesManager
@@ -35,7 +32,7 @@ class WelcomeActivity : AppCompatActivity() {
                 if (isActive) {
                     val intentToMainActivity = Intent(this@WelcomeActivity, MainActivity::class.java)
                     startActivity(intentToMainActivity)
-                    finish()
+//                    finish()
                 }
                 Log.d("WelcomeActivity", "onCreate: ${ApplicationPreferencesManager(this@WelcomeActivity).usernameId}")
             }

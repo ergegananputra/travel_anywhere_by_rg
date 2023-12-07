@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/text_display_large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.MyApp.DisplayLarge"
+        android:text="Welcome to the show" />
+
+    <TextView
+        android:id="@+id/text_display_medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.MyApp.DisplayMedium"
+        android:text="Welcome to the show" />
+
+    <TextView
+        android:id="@+id/text_display_small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.MyApp.DisplaySmall"
+        android:text="Welcome to the show" />
+
+    <TextView
+        android:id="@+id/text_headline_large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.MyApp.HeadlineLarge"
+        android:text="Welcome to the show" />
+
+    <TextView
+        android:id="@+id/text_headline_medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.MyApp.HeadlineMedium"
+        android:text="Welcome to the show" />
+
+    <TextView
+        android:id="@+id/text_headline_small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.MyApp.HeadlineSmall"
+        android:text="Welcome to the show" />
+
+    <TextView
+        android:id="@+id/text_title_large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.MyApp.TitleLarge"
+        android:text="Welcome to the show" />
+
+    <TextView
+        android:id="@+id/text_title_medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.MyApp.TitleMedium"
+        android:text="Welcome to the show" />
+
+    <TextView
+        android:id="@+id/text_title_small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.MyApp.TitleSmall"
+        android:text="Welcome to the show" />
+
+    <TextView
+        android:id="@+id/text_body_large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.MyApp.BodyLarge"
+        android:text="Welcome to the show" />
+
+    <TextView
+        android:id="@+id/text_body_medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.MyApp.BodyMedium"
+        android:text="Welcome to the show" />
+
+    <TextView
+        android:id="@+id/text_body_small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.MyApp.BodySmall"
+        android:text="Welcome to the show" />
+
+    <TextView
+        android:id="@+id/text_label_large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
+        android:text="Welcome to the show" />
+
+    <TextView
+        android:id="@+id/text_label_medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.MyApp.LabelMedium"
+        android:text="Welcome to the show" />
+
+    <TextView
+        android:id="@+id/text_label_small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.MyApp.LabelSmall"
+        android:text="Welcome to the show" />
+
+
+
+
+
+
+
+
+</LinearLayout>
