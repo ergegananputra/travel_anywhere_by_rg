@@ -9,8 +9,11 @@ import android.view.WindowManager
 import android.widget.DatePicker
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asFlow
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ppb.travelanywhere.TravelAnywhereApps
 import com.ppb.travelanywhere.databinding.ActivityPesanBinding
 import com.ppb.travelanywhere.dialog.GlobalSheetFragment
@@ -27,12 +30,18 @@ import com.ppb.travelanywhere.services.calendar.CalendarModule
 import com.ppb.travelanywhere.services.database.AppDatabaseViewModel
 import com.ppb.travelanywhere.services.database.AppDatabaseViewModelFactory
 import com.ppb.travelanywhere.services.database.DatabaseInformationManager
+import com.ppb.travelanywhere.services.database.PaketDatabase
 import com.ppb.travelanywhere.services.database.stations.StationsTable
 import com.ppb.travelanywhere.services.database.train_classes.TrainClassesTable
 import com.ppb.travelanywhere.services.database.trains.TrainsTable
+import com.ppb.travelanywhere.services.model.PaketModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.Calendar
+import java.util.Date
+import kotlin.math.abs
 
 class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
@@ -40,6 +49,21 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         ActivityPesanBinding.inflate(layoutInflater)
     }
 
+
+
+    // Form Data
+    private val basePrice = 10000
+    private var previousTrainClassPrice = 0
+    private var previousTrainPrice = 0
+    private var previousDistancePrice = 0
+    private var previousPaketPrice = 0
+
+    private var totalPrice = MutableLiveData<Int>(0)
+    private suspend fun getPrice() : Int {
+        return totalPrice.asFlow().first()
+    }
+
+    private var selectedDate : Date? = null
 
     private val stasiunKeberangkatanViewModel by lazy {
         ViewModelProvider(this)[StationsKeberangkatanViewModel::class.java]
@@ -65,6 +89,8 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
     private lateinit var listKelasKereta : List<TrainClassesTable>
     private lateinit var listKereta : List<TrainsTable>
 
+    private val selectedPaket = mutableListOf<PaketModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -84,9 +110,110 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
 
         pilihTanggalKeberangkatan()
+        setUpRecyclerPaket()
+
+        observeDataForPrice()
 
 
+        // Check Out
+        binding.buttonCheckout.setOnClickListener {
+            if (selectedDate == null) {
+                Toast.makeText(this, "Pilih Tanggal Keberangkatan Terlebih Dahulu", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            if (stasiunKeberangkatanViewModel.data.value == null) {
+                Toast.makeText(this, "Pilih Stasiun Keberangkatan Terlebih Dahulu", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            if (stasiunKedatanganViewModel.data.value == null) {
+                Toast.makeText(this, "Pilih Stasiun Kedatangan Terlebih Dahulu", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            if (kelasKeretaViewModel.data.value == null) {
+                Toast.makeText(this, "Pilih Kelas Kereta Terlebih Dahulu", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            if (keretaViewModel.data.value == null) {
+                Toast.makeText(this, "Pilih Kereta Terlebih Dahulu", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
+            var paketBinary = "0000000"
+            selectedPaket.forEach {
+                paketBinary = paketBinary.replaceRange(it.id - 1, it.id, "1")
+            }
+
+            lifecycleScope.launch {
+                withContext(Dispatchers.IO) {
+                    val price = getPrice()
+
+                    appViewModel.insertTicketHistory(
+                        tanggalKeberangkatan = selectedDate!!,
+                        kereta = keretaViewModel.data.value!!.name!!,
+                        kelas = kelasKeretaViewModel.data.value!!.name!!,
+                        harga = price,
+                        kotaAsal = stasiunKeberangkatanViewModel.data.value!!.city!!,
+                        stasiunAsal = stasiunKeberangkatanViewModel.data.value!!.name!!,
+                        kotaTujuan = stasiunKedatanganViewModel.data.value!!.city!!,
+                        stasiunTujuan = stasiunKedatanganViewModel.data.value!!.name!!,
+                        paketBinary = paketBinary
+                    )
+                }
+
+                Toast.makeText(this@PesanActivity, "Berhasil Checkout", Toast.LENGTH_SHORT).show()
+
+                // Finish Activity
+                setResult(RESULT_OK)
+                finish()
+
+            }
+
+        }
+
+    }
+
+    private fun observeDataForPrice() {
+        totalPrice.observe(this) {
+            val newPrice = "Rp. $it"
+            binding.textTotalHarga.text =  newPrice
+        }
+    }
+
+    private fun setUpRecyclerPaket() {
+        with(binding) {
+            recyclerView.apply {
+                adapter = PaketAdapter(
+                    PaketDatabase.paketList,
+                    onIsChecked = {
+                        Log.d("PesanActivity", "setUpRecyclerPaket Checked: $it")
+                        selectedPaket.add(it)
+                        calculatePaketPrice()
+                    },
+                    onNotChecked = {
+                        Log.d("PesanActivity", "setUpRecyclerPaket UnChecked: $it")
+                        selectedPaket.remove(it)
+                        calculatePaketPrice()
+                    }
+                )
+
+                layoutManager = LinearLayoutManager(this@PesanActivity, LinearLayoutManager.HORIZONTAL, false )
+            }
+        }
+    }
+
+    private fun calculatePaketPrice() {
+        var newPaketPrice = 0
+        selectedPaket.forEach {
+            newPaketPrice += it.price
+        }
+
+        lifecycleScope.launch {
+            val price = getPrice()
+            val tempPrice = price - previousPaketPrice
+            val newPrice = tempPrice + newPaketPrice
+            totalPrice.value = newPrice
+            previousPaketPrice = newPaketPrice
+        }
 
     }
 
@@ -149,6 +276,17 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         keretaViewModel.data.observe(this) {
             Log.d("PesanActivity", "Kereta: $it")
             binding.textViewPilihanKereta.text = it.name
+
+            if ( it.weight != null ) {
+                val newWeightPrice = basePrice * it.weight!! / 10
+                lifecycleScope.launch {
+                    val price = getPrice()
+                    val tempPrice = price - previousTrainPrice
+                    val newPrice = tempPrice + newWeightPrice
+                    totalPrice.value = newPrice
+                    previousTrainPrice = newWeightPrice
+                }
+            }
         }
     }
 
@@ -180,6 +318,17 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         kelasKeretaViewModel.data.observe(this) {
             Log.d("PesanActivity", "Kelas Kereta: $it")
             binding.buttonPilihKelasKereta.text = it.name
+
+            if ( it.weight != null ) {
+                val newWeightPrice = basePrice * it.weight!! / 10
+                lifecycleScope.launch {
+                    val price = getPrice()
+                    val tempPrice = price - previousTrainClassPrice
+                    val newPrice = tempPrice + newWeightPrice
+                    totalPrice.value = newPrice
+                    previousTrainClassPrice = newWeightPrice
+                }
+            }
         }
     }
 
@@ -213,6 +362,21 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         stasiunKedatanganViewModel.data.observe(this) {
             Log.d("PesanActivity", "Stasiun Kedatangan: $it")
             binding.buttonPilihStasiunKedatangan.text = it.name
+
+            if (stasiunKeberangkatanViewModel.data.value?.weight != null && it.weight != null) {
+                val arrival = it.weight!!
+                val departure = stasiunKeberangkatanViewModel.data.value!!.weight!!
+
+                // set weight
+                val newDistanceWeight: Int = abs(arrival - departure)/10 * basePrice
+                lifecycleScope.launch {
+                    val price = getPrice()
+                    val tempPrice = price - previousDistancePrice
+                    val newPrice = tempPrice + newDistanceWeight
+                    totalPrice.value = newPrice
+                    previousDistancePrice = newDistanceWeight
+                }
+            }
         }
     }
 
@@ -246,6 +410,23 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         stasiunKeberangkatanViewModel.data.observe(this) {
             Log.d("PesanActivity", "Stasiun Keberangkatan: $it")
             binding.buttonPilihStasiunKeberangkatan.text = it.name
+
+            if (stasiunKedatanganViewModel.data.value?.weight != null && it.weight != null) {
+                val arrival = stasiunKedatanganViewModel.data.value!!.weight!!
+                val departure = it.weight!!
+
+                // set weight
+                val newDistanceWeight: Int = abs(arrival - departure)/10 * basePrice
+                lifecycleScope.launch {
+                    val price = getPrice()
+                    val tempPrice = price - previousDistancePrice
+                    val newPrice = tempPrice + newDistanceWeight
+                    totalPrice.value = newPrice
+                    previousDistancePrice = newDistanceWeight
+                }
+
+
+            }
         }
     }
 
@@ -286,6 +467,11 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
                 intervalText += " $it"
             }
         }
+
+        // Simpan Data
+        val calendar = Calendar.getInstance()
+        calendar.set(year, month, dayOfMonth)
+        this.selectedDate = calendar.time
 
         binding.textViewTanggalKeberangkatan.text = selectedDate
         binding.countTanggalKeberangkatan.text = intervalText

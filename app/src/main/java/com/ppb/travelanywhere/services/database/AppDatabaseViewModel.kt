@@ -3,8 +3,10 @@ package com.ppb.travelanywhere.services.database
 import androidx.lifecycle.ViewModel
 import com.ppb.travelanywhere.services.database.queue.DbQueueTable
 import com.ppb.travelanywhere.services.database.stations.StationsTable
+import com.ppb.travelanywhere.services.database.ticket_history.TicketHistoryTable
 import com.ppb.travelanywhere.services.database.train_classes.TrainClassesTable
 import com.ppb.travelanywhere.services.database.trains.TrainsTable
+import java.util.Date
 
 class AppDatabaseViewModel(
     private val appDatabaseRepository: AppDatabaseRepository
@@ -137,5 +139,58 @@ class AppDatabaseViewModel(
     fun deleteAllQueues() {
         appDatabaseRepository.deleteAllQueue()
     }
+
+
+    // Ticket History
+    /**
+     * public final data class TicketHistoryTable(
+     *     @PrimaryKey(autoGenerate = true)
+     *     @NonNull
+     *     var id: Int = 0,
+     *     var tanggalKeberangkatan: Date? = null,
+     *     var kereta: String? = null,
+     *     var kelas: String? = null,
+     *     var harga: Int? = null,
+     *     var kotaAsal: String? = null,
+     *     var stasiunAsal: String? = null,
+     *     var kotaTujuan: String? = null,
+     *     var stasiunTujuan: String? = null,
+     *     var paketBinary: String = "0000000",
+     * )
+     */
+
+    val listTicketHistory = appDatabaseRepository.listTicketHistory
+    val upComingTicketHistory = appDatabaseRepository.upComingTicketHistory
+
+    fun insertTicketHistory(
+        tanggalKeberangkatan: Date,
+        kereta: String,
+        kelas: String,
+        harga: Int,
+        kotaAsal: String,
+        stasiunAsal: String,
+        kotaTujuan: String,
+        stasiunTujuan: String,
+        paketBinary: String
+    ) {
+        val ticketHistory = TicketHistoryTable(
+            tanggalKeberangkatan = tanggalKeberangkatan,
+            kereta = kereta,
+            kelas = kelas,
+            harga = harga,
+            kotaAsal = kotaAsal,
+            stasiunAsal = stasiunAsal,
+            kotaTujuan = kotaTujuan,
+            stasiunTujuan = stasiunTujuan,
+            paketBinary = paketBinary
+        )
+        appDatabaseRepository.insertTicketHistory(ticketHistory)
+    }
+
+    fun deleteAllTicketHistory() {
+        appDatabaseRepository.deleteAllTicketHistory()
+    }
+
+
 
 }

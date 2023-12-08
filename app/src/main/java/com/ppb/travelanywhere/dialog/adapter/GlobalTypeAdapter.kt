@@ -21,6 +21,9 @@ class GlobalTypeAdapter<T>(
                 cardViewOptionItem.setOnClickListener {
                     onClickItemListener(t)
                 }
+                imageButton.setOnClickListener {
+                    onClickItemListener(t)
+                }
             }
         }
 
