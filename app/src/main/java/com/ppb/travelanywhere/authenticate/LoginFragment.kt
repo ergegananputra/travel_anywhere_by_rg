@@ -87,8 +87,8 @@ class LoginFragment : Fragment() {
                 }
 
                 lifecycleScope.launch {
-                    val username = fireAuth.getUsername(id)
-                    ApplicationPreferencesManager(requireContext()).saveUserName(username ?: "Username")
+                    val (username, email) = fireAuth.getUsernameEmail(id)
+                    ApplicationPreferencesManager(requireContext()).saveUserData(username ?: "Username", email ?: "Email")
                 }
 
                 ApplicationPreferencesManager(requireContext()).saveUsernameId(id, role)

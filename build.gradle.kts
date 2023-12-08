@@ -10,4 +10,7 @@ plugins {
 
     // KSP
     id("com.google.devtools.ksp") version "1.9.0-1.0.13" apply false
+
+    // Navigation
+    id("androidx.navigation.safeargs.kotlin") version "2.6.0" apply false
 }

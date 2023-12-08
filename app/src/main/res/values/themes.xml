@@ -60,6 +60,8 @@
 
     <style name="Theme.TravelAnywhere" parent="Base.Theme.TravelAnywhere" />
 
+    <style name="Theme.TravelAnywhere.NoCutOut" parent="Theme.TravelAnywhere"/>
+
     <style name="AppTheme" parent="Theme.Material3.Light.NoActionBar">
 
         <item name="textAppearanceDisplayLarge">@style/TextAppearance.MyApp.DisplayLarge</item>

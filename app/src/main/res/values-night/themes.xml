@@ -36,4 +36,6 @@
         <item name="colorPrimaryInverse">@color/md_theme_dark_inversePrimary</item>
     </style>
 
+    <style name="Theme.TravelAnywhere.NoCutOut" parent="Theme.TravelAnywhere"/>
+
 </resources>

@@ -8,19 +8,15 @@
     android:background="?android:attr/colorBackground">
 
 
-
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView2"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="16dp"
         app:cardCornerRadius="100dp"
         app:layout_constraintBottom_toTopOf="@+id/text_view_username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95"
         app:strokeWidth="0dp">
 
         <ImageView
@@ -38,44 +34,43 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="300dp"
+        android:layout_marginBottom="4dp"
         android:text="Username"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.MyApp.TitleLarge"
         android:textColor="?attr/colorOnBackground"
-        app:layout_constraintBottom_toTopOf="@+id/button_log_out"
+        app:layout_constraintBottom_toTopOf="@+id/text_view_email"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.82" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/text_view_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:text="example@mail.com"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.MyApp.TitleMedium"
         android:textColor="?attr/colorOnBackground"
+        app:layout_constraintBottom_toTopOf="@+id/container_upload_image"
         app:layout_constraintEnd_toEndOf="@+id/text_view_username"
         app:layout_constraintStart_toStartOf="@+id/text_view_username"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_username" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.94" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_upload_image"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/button_log_out"
+        app:layout_constraintBottom_toTopOf="@+id/container_kelola_account"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_email"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.79">
 
         <TextView
             android:id="@+id/text_view_unggah_foto_profil_baru"
@@ -111,15 +106,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/button_log_out"
+        app:layout_constraintBottom_toTopOf="@+id/container_kelola_account"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/container_upload_image"
-        app:layout_constraintVertical_bias="0.06999999">
+        app:layout_constraintTop_toTopOf="@+id/guideline5"
+        app:layout_constraintVertical_bias="0.85">
 
         <TextView
             android:id="@+id/text_view_theme_account"
@@ -141,8 +135,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:checked="true"
-            android:text="Dark Mode"
             android:textColor="?attr/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -158,15 +150,16 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginBottom="90dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/button_log_out"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/container_app_theme_mode"
-        app:layout_constraintVertical_bias="0.100000024">
+        app:layout_constraintTop_toTopOf="@+id/guideline4"
+        app:layout_constraintVertical_bias="0.65999997">
 
         <TextView
             android:id="@+id/text_view_kelola_account"
@@ -201,15 +194,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/button_log_out"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/container_kelola_account"
-        app:layout_constraintVertical_bias="0.26">
+        app:layout_constraintVertical_bias="0.22000003">
 
         <TextView
             android:id="@+id/text_view_delete_account"
@@ -254,7 +247,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.53" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="275dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

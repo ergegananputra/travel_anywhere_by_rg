@@ -6,8 +6,10 @@ import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.view.WindowManager
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -17,10 +19,20 @@ import com.ppb.travelanywhere.services.api.FireSeederFactory
 class MainActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private val viewModel: SystemThemeViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        viewModel.themeMode.value = AppCompatDelegate.getDefaultNightMode()
+        if (viewModel.themeMode.value == AppCompatDelegate.MODE_NIGHT_YES) {
+            viewModel.switchState.value = true
+            viewModel.switchLabel.value = "Dark Mode"
+        } else {
+            viewModel.switchState.value = false
+            viewModel.switchLabel.value = "Light Mode"
+        }
 
         val typedValue = TypedValue()
         theme.resolveAttribute(android.R.attr.colorBackground, typedValue, true)

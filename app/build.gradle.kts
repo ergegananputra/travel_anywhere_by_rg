@@ -5,6 +5,9 @@ plugins {
     // KSP
     id("com.google.devtools.ksp")
     id("com.google.gms.google-services")
+
+    // Navigation
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
