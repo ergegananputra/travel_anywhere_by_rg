@@ -14,11 +14,11 @@
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/the_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="22dp"
         android:paddingHorizontal="25dp"
-        >
+        android:paddingVertical="22dp">
 
 
         <TextView
@@ -48,9 +48,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textColor="?attr/colorOnPrimaryContainer"
-            android:textAppearance="@style/TextAppearance.MyApp.TitleMedium"
             android:text="Rp0 Total Harga Tiket Kereta"
+            android:textAppearance="@style/TextAppearance.MyApp.TitleMedium"
+            android:textColor="?attr/colorOnPrimaryContainer"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_kereta_kelas" />
 
@@ -86,28 +86,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            app:tint="?attr/colorSecondary"
+            android:src="@drawable/baseline_apartment_24"
             app:layout_constraintBottom_toTopOf="@+id/line"
             app:layout_constraintStart_toStartOf="@+id/line"
-            android:src="@drawable/baseline_apartment_24" />
+            app:tint="?attr/colorSecondary" />
 
         <ImageView
             android:id="@+id/imageView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:tint="?attr/colorSecondary"
+            android:src="@drawable/baseline_location_city_24"
             app:layout_constraintBottom_toBottomOf="@+id/imageView3"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/baseline_location_city_24" />
+            app:tint="?attr/colorSecondary" />
 
         <TextView
             android:id="@+id/text_asal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Asal"
-            android:textColor="?attr/colorOnSurface"
             android:layout_marginTop="10dp"
+            android:text="Asal"
             android:textAppearance="@style/TextAppearance.MyApp.LabelMedium"
+            android:textColor="?attr/colorOnSurface"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/line" />
 
@@ -124,8 +124,8 @@
             android:id="@+id/kota_asal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
             android:text="Yogyakarta"
+            android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
             android:textColor="?attr/colorOnSurface"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_asal" />
@@ -134,8 +134,8 @@
             android:id="@+id/stasiun_asal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
             android:text="Tugu"
+            android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
             android:textColor="?attr/colorOnSurface"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/kota_asal" />
@@ -144,8 +144,8 @@
             android:id="@+id/kota_tujuan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
             android:text="Surabaya"
+            android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
             android:textColor="?attr/colorOnSurface"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_tujuan" />
@@ -154,8 +154,8 @@
             android:id="@+id/stasiun_tujuan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
             android:text="Gubeng"
+            android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
             android:textColor="?attr/colorOnSurface"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/kota_tujuan" />
@@ -165,8 +165,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:textAppearance="@style/TextAppearance.MyApp.TitleLarge"
             android:text="Paket"
+            android:textAppearance="@style/TextAppearance.MyApp.TitleLarge"
             android:textColor="?attr/colorOnPrimaryContainer"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/stasiun_asal" />
@@ -175,32 +175,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:visibility="visible"
             app:layout_constraintTop_toBottomOf="@+id/text_paket">
 
             <LinearLayout
                 android:id="@+id/paket_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:layout_marginBottom="6dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    app:tint="?attr/colorSecondary"
-                    android:src="@drawable/outline_vrpano_24"/>
+                    android:src="@drawable/outline_vrpano_24"
+                    app:tint="?attr/colorSecondary" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
                     android:text="Pemandangan Panorama"
-                    android:textColor="?attr/colorSecondary"
-                     />
+                    android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
+                    android:textColor="?attr/colorSecondary" />
 
             </LinearLayout>
 
@@ -217,148 +217,150 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    app:tint="?attr/colorSecondary"
-                    android:src="@drawable/outline_local_cafe_24" />
+                    android:src="@drawable/outline_local_cafe_24"
+                    app:tint="?attr/colorSecondary" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
                     android:text="Minuman Signature"
-                    android:textColor="?attr/colorSecondary"
-                    />
+                    android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
+                    android:textColor="?attr/colorSecondary" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/paket_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:layout_marginBottom="6dp"
-                android:visibility="visible"
-                android:orientation="horizontal">
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    app:tint="?attr/colorSecondary"
-                    android:src="@drawable/outline_brunch_dining_24"/>
+                    android:src="@drawable/outline_brunch_dining_24"
+                    app:tint="?attr/colorSecondary" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
                     android:text="Makanan Berat"
-                    android:textColor="?attr/colorSecondary"
-                    />
+                    android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
+                    android:textColor="?attr/colorSecondary" />
 
 
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/paket_4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:layout_marginBottom="6dp"
-                android:visibility="visible"
-                android:orientation="horizontal">
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    app:tint="?attr/colorSecondary"
-                    android:src="@drawable/outline_movie_24"/>
+                    android:src="@drawable/outline_movie_24"
+                    app:tint="?attr/colorSecondary" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
                     android:text="Akses Film"
-                    android:textColor="?attr/colorSecondary"
-                    />
+                    android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
+                    android:textColor="?attr/colorSecondary" />
 
 
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/paket_5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:layout_marginBottom="6dp"
-                android:visibility="visible"
-                android:orientation="horizontal">
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    app:tint="?attr/colorSecondary"
-                    android:src="@drawable/outline_fastfood_24"/>
+                    android:src="@drawable/outline_fastfood_24"
+                    app:tint="?attr/colorSecondary" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
                     android:text="Makanan Ringan"
-                    android:textColor="?attr/colorSecondary"
-                    />
+                    android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
+                    android:textColor="?attr/colorSecondary" />
 
 
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/paket_6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:layout_marginBottom="6dp"
-                android:visibility="visible"
-                android:orientation="horizontal">
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    app:tint="?attr/colorSecondary"
-                    android:src="@drawable/flowsheet"/>
+                    android:src="@drawable/flowsheet"
+                    app:tint="?attr/colorSecondary" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
                     android:text="Jaminan Duduk Dekat Jendela"
-                    android:textColor="?attr/colorSecondary"
-                    />
-
+                    android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
+                    android:textColor="?attr/colorSecondary" />
 
 
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/paket_7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:layout_marginBottom="6dp"
-                android:visibility="visible"
-                android:orientation="horizontal">
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    app:tint="?attr/colorSecondary"
-                    android:src="@drawable/outline_accessible_24"/>
+                    android:src="@drawable/outline_accessible_24"
+                    app:tint="?attr/colorSecondary" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
                     android:text="Berkebutuhan Khusus"
-                    android:textColor="?attr/colorSecondary"
-                    />
+                    android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
+                    android:textColor="?attr/colorSecondary" />
 
 
             </LinearLayout>
 
             <TextView
                 android:id="@+id/paket_kosong"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="50dp"
@@ -366,7 +368,7 @@
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
                 android:textColor="?attr/colorOnPrimaryContainer"
-                />
+                android:visibility="gone" />
 
 
         </LinearLayout>
@@ -376,8 +378,8 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:backgroundTint="?attr/colorTertiaryContainer"
-            android:textAppearance="@style/TextAppearance.MyApp.LabelSmall"
             android:text="Active"
+            android:textAppearance="@style/TextAppearance.MyApp.LabelSmall"
             android:textColor="?attr/colorOnTertiaryContainer"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
@@ -389,7 +391,7 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:backgroundTint="?attr/colorSecondaryContainer"
-            android:text="Waiting"
+            android:text="Done"
             android:textAppearance="@style/TextAppearance.MyApp.LabelSmall"
             android:textColor="?attr/colorOnSecondaryContainer"
             android:visibility="visible"

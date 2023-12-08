@@ -218,10 +218,22 @@ class FireAuth : FireConsole() {
             }
     }
 
-
-
-
-
+    suspend fun getUsername(id: String): String? {
+        return suspendCoroutine { continuation ->
+            usersRef.whereEqualTo(field_ID, id).get(Source.SERVER).addOnSuccessListener {
+                if (it.isEmpty) {
+                    Log.w("FireAuth", "User not exist")
+                    continuation.resume(null)
+                } else {
+                    val user = it.toObjects(User::class.java)[0]
+                    continuation.resume(user.username)
+                }
+            }.addOnFailureListener {
+                Log.e("FireAuth", "Error getting username :", it)
+                continuation.resumeWithException(it)
+            }
+        }
+    }
 
 
 

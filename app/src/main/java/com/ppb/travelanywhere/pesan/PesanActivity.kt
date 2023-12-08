@@ -226,9 +226,9 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
                 val factory = AppDatabaseViewModelFactory((application as TravelAnywhereApps).appRepository)
                 appViewModel = ViewModelProvider(this@PesanActivity, factory)[AppDatabaseViewModel::class.java]
 
-                listStasiun = appViewModel.listStations
-                listKelasKereta = appViewModel.listTrainClasses
-                listKereta = appViewModel.listTrains
+                listStasiun = appViewModel.listStations()
+                listKelasKereta = appViewModel.listTrainClasses()
+                listKereta = appViewModel.listTrains()
 
                 // Spinner
                 withContext(Dispatchers.Main) {

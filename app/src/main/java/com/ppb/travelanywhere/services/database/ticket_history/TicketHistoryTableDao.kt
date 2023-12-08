@@ -8,11 +8,11 @@ import androidx.room.Query
 interface TicketHistoryTableDao {
 
     @get:Query("SELECT * FROM ticket_history_table")
-    val selectAll: List<TicketHistoryTable>
+    val selectAll: List<TicketHistoryTable>?
 
 
-    @get:Query("SELECT * FROM ticket_history_table WHERE tanggal_keberangkatan >= date('now') ORDER BY tanggal_keberangkatan ASC LIMIT 1")
-    val unComing: TicketHistoryTable?
+    @Query("SELECT * FROM ticket_history_table WHERE tanggal_keberangkatan >= :currentTimestamp ORDER BY tanggal_keberangkatan ASC LIMIT 1")
+    fun unComing(currentTimestamp: Long = System.currentTimeMillis()): TicketHistoryTable?
 
     @Insert(onConflict = androidx.room.OnConflictStrategy.IGNORE)
     fun insert(obj: TicketHistoryTable)

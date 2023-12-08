@@ -60,62 +60,63 @@ class DatabaseInformationManager(
     
 
 
-    fun sendQueue() {
-        val queue = appViewModel.listQueues
-        var isTrainUpdated = false
-        var isStationUpdated = false
-        var isTrainClassUpdated = false
+    suspend fun sendQueue() {
+        withContext(Dispatchers.IO) {
+            val queue = appViewModel.listQueues()
+            var isTrainUpdated = false
+            var isStationUpdated = false
+            var isTrainClassUpdated = false
 
-        queue.forEach { q ->
-            var table : Int? = null
-            when(q.targetTable) {
-                "stations" -> {
-                    table = 1
-                    isStationUpdated = true
+            queue.forEach { q ->
+                var table : Int? = null
+                when(q.targetTable) {
+                    "stations" -> {
+                        table = 1
+                        isStationUpdated = true
+                    }
+                    "trains" -> {
+                        table = 2
+                        isTrainUpdated = true
+                    }
+                    "train_classes" -> {
+                        table = 3
+                        isTrainClassUpdated = true
+                    }
                 }
-                "trains" -> {
-                    table = 2
-                    isTrainUpdated = true
+
+                if (table != null) {
+                    when(q.targetAction) {
+                        "insert" -> insertToFireStore(q, table)
+                        "update" -> updateToFireStore(q, table)
+                        "delete" -> deleteToFireStore(q, table)
+                        else ->
+                            Log.e(
+                                "DatabaseInformationManager",
+                                "Error updating ${q.targetTable} : targetAction is not found"
+                            )
+                    }
+
+
+                } else {
+                    Log.e("DatabaseInformationManager", "Error updating ${q.targetTable} : tableRef is not found")
                 }
-                "train_classes" -> {
-                    table = 3
-                    isTrainClassUpdated = true
-                }
+
             }
 
-            if (table != null) {
-                when(q.targetAction) {
-                    "insert" -> insertToFireStore(q, table)
-                    "update" -> updateToFireStore(q, table)
-                    "delete" -> deleteToFireStore(q, table)
-                    else ->
-                        Log.e(
-                            "DatabaseInformationManager",
-                            "Error updating ${q.targetTable} : targetAction is not found"
-                        )
-                }
-
-
-            } else {
-                Log.e("DatabaseInformationManager", "Error updating ${q.targetTable} : tableRef is not found")
+            if (isStationUpdated) {
+                fireConsole.updateStationVersion()
+            }
+            if (isTrainUpdated) {
+                fireConsole.updateTrainVersion()
+            }
+            if (isTrainClassUpdated) {
+                fireConsole.updateTrainClassesVersion()
             }
 
+            isStationUpdated = false
+            isTrainUpdated = false
+            isTrainClassUpdated = false
         }
-
-        if (isStationUpdated) {
-            fireConsole.updateStationVersion()
-        }
-        if (isTrainUpdated) {
-            fireConsole.updateTrainVersion()
-        }
-        if (isTrainClassUpdated) {
-            fireConsole.updateTrainClassesVersion()
-        }
-
-        isStationUpdated = false
-        isTrainUpdated = false
-        isTrainClassUpdated = false
-
 
     }
 

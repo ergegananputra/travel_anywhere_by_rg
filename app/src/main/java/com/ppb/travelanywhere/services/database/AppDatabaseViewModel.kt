@@ -1,11 +1,14 @@
 package com.ppb.travelanywhere.services.database
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.ppb.travelanywhere.services.database.queue.DbQueueTable
 import com.ppb.travelanywhere.services.database.stations.StationsTable
 import com.ppb.travelanywhere.services.database.ticket_history.TicketHistoryTable
 import com.ppb.travelanywhere.services.database.train_classes.TrainClassesTable
 import com.ppb.travelanywhere.services.database.trains.TrainsTable
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.util.Date
 
 class AppDatabaseViewModel(
@@ -13,7 +16,7 @@ class AppDatabaseViewModel(
 ) : ViewModel() {
 
     // Train
-    val listTrains = appDatabaseRepository.listTrains
+    suspend fun listTrains () = withContext(Dispatchers.IO) {appDatabaseRepository.listTrains()}
 
     suspend fun searchTrains(keyword: String) : List<TrainsTable>{
         return appDatabaseRepository.searchTrains(keyword)
@@ -42,7 +45,7 @@ class AppDatabaseViewModel(
 
     // Station
 
-    val listStations = appDatabaseRepository.listStations
+    suspend fun listStations () = appDatabaseRepository.listStations()
 
     suspend fun searchStations(keyword: String) : List<StationsTable>{
         return appDatabaseRepository.searchStations(keyword)
@@ -71,7 +74,7 @@ class AppDatabaseViewModel(
 
     // Train Classes
 
-    val listTrainClasses = appDatabaseRepository.listTrainClasses
+    suspend fun listTrainClasses () = appDatabaseRepository.listTrainClasses()
 
     suspend fun searchTrainClasses(keyword: String) : List<TrainClassesTable>{
         return appDatabaseRepository.searchTrainClasses(keyword)
@@ -110,8 +113,8 @@ class AppDatabaseViewModel(
      *     val additionalData: String? = null
      */
 
-    val listQueues = appDatabaseRepository.listQueue
-    val showQueueList = appDatabaseRepository.showListQueue
+    suspend fun listQueues () = appDatabaseRepository.listQueue()
+    suspend fun showQueueList () = appDatabaseRepository.showListQueue()
 
     fun insertQueue(
         targetTable : String,
@@ -159,8 +162,10 @@ class AppDatabaseViewModel(
      * )
      */
 
-    val listTicketHistory = appDatabaseRepository.listTicketHistory
-    val upComingTicketHistory = appDatabaseRepository.upComingTicketHistory
+    suspend fun listTicketHistory () : List<TicketHistoryTable>? {
+        return appDatabaseRepository.listTicketHistory()
+    }
+    suspend fun upComingTicketHistory() = appDatabaseRepository.upComingTicketHistory()
 
     fun insertTicketHistory(
         tanggalKeberangkatan: Date,

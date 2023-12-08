@@ -11,6 +11,8 @@ import com.ppb.travelanywhere.services.database.train_classes.TrainClassesTable
 import com.ppb.travelanywhere.services.database.train_classes.TrainClassesTableDao
 import com.ppb.travelanywhere.services.database.trains.TrainsTable
 import com.ppb.travelanywhere.services.database.trains.TrainsTableDao
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -25,16 +27,18 @@ class AppDatabaseRepository(
     private val executorService : ExecutorService = Executors.newSingleThreadExecutor()
 
     // Train
-    val listTrains = trainsTableDao.selectAll
+    suspend fun listTrains () : List<TrainsTable> {
+        return withContext(Dispatchers.IO) { trainsTableDao.selectAll }
+    }
 
     suspend fun searchTrains(keyword: String): List<TrainsTable> {
         Log.d("AppDatabaseRepository", "searchTrains: $keyword")
-        return trainsTableDao.search(keyword)
+        return withContext(Dispatchers.IO) { trainsTableDao.search(keyword) }
     }
 
     suspend fun getTrainById(id: String): TrainsTable {
         Log.d("AppDatabaseRepository", "getTrainById: $id")
-        return trainsTableDao.getById(id)
+        return withContext(Dispatchers.IO) { trainsTableDao.getById(id) }
     }
 
     fun insertTrain(train: TrainsTable) {
@@ -67,16 +71,18 @@ class AppDatabaseRepository(
 
 
     // Station
-    val listStations = stationsTableDao.selectAll
+    suspend fun listStations () : List<StationsTable> {
+        return withContext(Dispatchers.IO) { stationsTableDao.selectAll }
+    }
 
     suspend fun searchStations(keyword: String): List<StationsTable> {
         Log.d("AppDatabaseRepository", "searchStations: $keyword")
-        return stationsTableDao.search(keyword)
+        return withContext(Dispatchers.IO) { stationsTableDao.search(keyword) }
     }
 
     suspend fun getStationById(id: String): StationsTable {
         Log.d("AppDatabaseRepository", "getStationById: $id")
-        return stationsTableDao.getById(id)
+        return withContext(Dispatchers.IO) { stationsTableDao.getById(id) }
     }
 
     fun insertStation(station: StationsTable) {
@@ -110,17 +116,19 @@ class AppDatabaseRepository(
 
     // Train Class
 
-    val listTrainClasses = trainClassesTableDao.selectAll
+    suspend fun listTrainClasses () : List<TrainClassesTable> {
+        return withContext(Dispatchers.IO) { trainClassesTableDao.selectAll }
+    }
 
 
     suspend fun searchTrainClasses(keyword: String): List<TrainClassesTable> {
         Log.d("AppDatabaseRepository", "searchTrainClasses: $keyword")
-        return trainClassesTableDao.search(keyword)
+        return withContext(Dispatchers.IO) { trainClassesTableDao.search(keyword) }
     }
 
     suspend fun getTrainClassById(id: String): TrainClassesTable {
         Log.d("AppDatabaseRepository", "getTrainClassById: $id")
-        return trainClassesTableDao.getById(id)
+        return withContext(Dispatchers.IO) { trainClassesTableDao.getById(id) }
     }
 
     fun insertTrainClass(trainClass: TrainClassesTable) {
@@ -154,9 +162,15 @@ class AppDatabaseRepository(
 
     // Queue
 
-    val listQueue = queueTableDao.selectAll
-    val showListQueue = queueTableDao.showQueue
-    val countQueue = queueTableDao.count
+    suspend fun listQueue () : List<DbQueueTable> {
+        return withContext(Dispatchers.IO) { queueTableDao.selectAll }
+    }
+    suspend fun showListQueue () : List<DbQueueTable> {
+        return withContext(Dispatchers.IO) { queueTableDao.showQueue }
+    }
+    suspend fun countQueue () : Int {
+        return withContext(Dispatchers.IO) { queueTableDao.count }
+    }
 
     fun insertQueue(queue: DbQueueTable) {
         Log.i("AppDatabaseRepository", "insertQueue: $queue")
@@ -182,8 +196,12 @@ class AppDatabaseRepository(
 
 
     // Ticket History
-    val listTicketHistory = ticketHistoryTableDao.selectAll
-    val upComingTicketHistory = ticketHistoryTableDao.unComing
+    suspend fun listTicketHistory () : List<TicketHistoryTable>? {
+        return withContext(Dispatchers.IO) {ticketHistoryTableDao.selectAll }
+    }
+    suspend fun upComingTicketHistory () : TicketHistoryTable? {
+        return withContext(Dispatchers.IO) { ticketHistoryTableDao.unComing() }
+    }
 
     fun insertTicketHistory(ticketHistory: TicketHistoryTable) {
         Log.i("AppDatabaseRepository", "insertTicketHistory: $ticketHistory")

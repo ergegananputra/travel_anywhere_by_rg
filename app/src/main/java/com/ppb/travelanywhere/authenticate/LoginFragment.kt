@@ -86,6 +86,11 @@ class LoginFragment : Fragment() {
                     return@withContext
                 }
 
+                lifecycleScope.launch {
+                    val username = fireAuth.getUsername(id)
+                    ApplicationPreferencesManager(requireContext()).saveUserName(username ?: "Username")
+                }
+
                 ApplicationPreferencesManager(requireContext()).saveUsernameId(id, role)
                 val intentToMainActivity = Intent(requireContext(), MainActivity::class.java)
                 startActivity(intentToMainActivity)
