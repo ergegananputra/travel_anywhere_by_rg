@@ -34,7 +34,7 @@
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/appCompatImageButton"
+                android:id="@+id/button_pilih_tanggal"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginStart="24dp"
@@ -58,31 +58,33 @@
                 android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
                 android:textColor="?attr/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/appCompatImageButton"
-                app:layout_constraintTop_toTopOf="@+id/appCompatImageButton" />
+                app:layout_constraintStart_toEndOf="@+id/button_pilih_tanggal"
+                app:layout_constraintTop_toTopOf="@+id/button_pilih_tanggal" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/text_view_tanggal_keberangkatan"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
-                android:text="19 September 2001"
+                android:text="Belum memilih tanggal"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:textAppearance="@style/TextAppearance.MyApp.TitleLarge"
                 android:textColor="?attr/colorOnBackground"
-                app:layout_constraintBottom_toTopOf="@+id/textView5"
+                app:layout_constraintBottom_toTopOf="@+id/count_tanggal_keberangkatan"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/text_view_tanggal_keberangkatan_label"
                 app:layout_constraintTop_toBottomOf="@+id/text_view_tanggal_keberangkatan_label" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/count_tanggal_keberangkatan"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:text="0 Hari dari sekarang"
                 android:textAppearance="@style/TextAppearance.MyApp.LabelMedium"
                 android:textColor="?attr/colorSecondary"
-                app:layout_constraintBottom_toBottomOf="@+id/appCompatImageButton"
+                app:layout_constraintBottom_toBottomOf="@+id/button_pilih_tanggal"
                 app:layout_constraintEnd_toEndOf="@+id/text_view_tanggal_keberangkatan_label"
                 app:layout_constraintStart_toStartOf="@+id/text_view_tanggal_keberangkatan_label" />
 
@@ -93,8 +95,8 @@
                 android:layout_marginTop="32dp"
                 android:text="Pilih Stasiun"
                 android:textAppearance="@style/TextAppearance.MyApp.TitleLarge"
-                app:layout_constraintStart_toStartOf="@+id/appCompatImageButton"
-                app:layout_constraintTop_toBottomOf="@+id/appCompatImageButton" />
+                app:layout_constraintStart_toStartOf="@+id/button_pilih_tanggal"
+                app:layout_constraintTop_toBottomOf="@+id/button_pilih_tanggal" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView3"
@@ -182,7 +184,7 @@
                 android:layout_marginTop="32dp"
                 android:text="Pilih Kereta"
                 android:textAppearance="@style/TextAppearance.MyApp.TitleLarge"
-                app:layout_constraintStart_toStartOf="@+id/appCompatImageButton"
+                app:layout_constraintStart_toStartOf="@+id/button_pilih_tanggal"
                 app:layout_constraintTop_toBottomOf="@+id/materialCardView3" />
 
             <com.google.android.material.card.MaterialCardView
@@ -247,7 +249,7 @@
                 android:layout_marginTop="50dp"
                 android:text="Pilih Paket Tambahan"
                 android:textAppearance="@style/TextAppearance.MyApp.TitleLarge"
-                app:layout_constraintEnd_toEndOf="@+id/textView4"
+                app:layout_constraintEnd_toEndOf="@+id/text_view_tanggal_keberangkatan"
                 app:layout_constraintStart_toStartOf="@+id/text_view_plih_kereta_label"
                 app:layout_constraintTop_toBottomOf="@+id/materialCardView4" />
 

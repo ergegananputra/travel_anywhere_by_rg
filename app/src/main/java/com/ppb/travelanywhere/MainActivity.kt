@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.ppb.travelanywhere.databinding.ActivityMainBinding
+import com.ppb.travelanywhere.services.api.FireSeederFactory
 
 class MainActivity : AppCompatActivity() {
 

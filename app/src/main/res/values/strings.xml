@@ -2,62 +2,36 @@
     <string name="app_name">Travel Anywhere</string>
     <string name="background">background</string>
 
-    <array name="stasiun">
-        <item>Pilih</item>
-        <item>Yogyakarta, Tugu</item>
-        <item>Yogyakarta, Lempuyangan</item>
-        <item>Yogyakarta, Maguwo</item>
-        <item>Yogyakarta, Wates</item>
-        <item>Yogyakarta, Kutoarjo</item>
-        <item>Jakarta, Senayan</item>
-        <item>Jakarta, Gambir</item>
-        <item>Jakarta, Jatinegara</item>
-        <item>Jakarta, Pasar Senen</item>
-        <item>Surabaya, Pasar Turi</item>
-        <item>Surabaya, Gubeng</item>
-        <item>Bandung, Kiaracondong</item>
-        <item>Bandung, Hall</item>
-        <item>Malang, Malang</item>
-        <item>Malang, Blimbing</item>
-        <item>Semarang, Poncol</item>
-        <item>Semarang, Tawang</item>
-        <item>Mojokerto, Mojokerto</item>
-        <item>Mojokerto, Jombang</item>
-        <item>Kediri, Kertosono</item>
-        <item>Solo, Balapan</item>
-        <item>Solo, Purwosari</item>
-        <item>Solo, Solojebres</item>
+    <array name="months">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
     </array>
 
-    <array name="nama_kereta">
-        <item>Pilih</item>
-        <item>KA Argo Lawu</item>
-        <item>KA Turangga</item>
-        <item>KA Prameks</item>
-        <item>KA Gadjah Wong</item>
-        <item>KA Matarmaja</item>
-        <item>KA Argo Parahyangan</item>
-        <item>KA Argo Bromo Anggrek</item>
-        <item>KA Argo Sindoro</item>
-        <item>KA Argo Muria</item>
-        <item>KA Argo Wilis</item>
-        <item>KA Bima</item>
-        <item>KA Gajayana</item>
-        <item>KA Jayabaya</item>
-        <item>KA Kertajaya</item>
-        <item>KA Kutojaya Selatan</item>
-        <item>KA Kutojaya Utara</item>
-        <item>KA Logawa</item>
-        <item>KA Sancaka</item>
+    <array name="months_short">
+        <item>Jan</item>
+        <item>Feb</item>
+        <item>Mar</item>
+        <item>Apr</item>
+        <item>May</item>
+        <item>Jun</item>
+        <item>Jul</item>
+        <item>Aug</item>
+        <item>Sep</item>
+        <item>Oct</item>
+        <item>Nov</item>
+        <item>Dec</item>
     </array>
 
-    <array name="kelas_kereta">
-        <item>Pilih</item>
-        <item>Eksekutif</item>
-        <item>Bisnis</item>
-        <item>Ekonomi</item>
-    </array>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
