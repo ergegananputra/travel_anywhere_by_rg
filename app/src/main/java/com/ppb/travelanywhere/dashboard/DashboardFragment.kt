@@ -134,9 +134,9 @@ class DashboardFragment : Fragment() {
         val calendar = Calendar.getInstance()
         calendar.time = ticketHistoryTable.tanggalKeberangkatan!!
 
-        val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
-        val month = calendar.get(Calendar.MONTH)
-        val year = calendar.get(Calendar.YEAR)
+        var dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+        var month = calendar.get(Calendar.MONTH)
+        var year = calendar.get(Calendar.YEAR)
 
         val intervalCheck = CalendarModule.getIntervalDay(dayOfMonth, month, year)
         if (intervalCheck > 0) {
@@ -184,12 +184,12 @@ class DashboardFragment : Fragment() {
         }
 
         tripCard.buttonActive.setOnClickListener {
-            val calendar = Calendar.getInstance()
+
             calendar.time = ticketHistoryTable.tanggalKeberangkatan!!
 
-            val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
-            val month = calendar.get(Calendar.MONTH)
-            val year = calendar.get(Calendar.YEAR)
+            dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+            month = calendar.get(Calendar.MONTH)
+            year = calendar.get(Calendar.YEAR)
 
             val interval = CalendarModule.getIntervalDay(dayOfMonth, month, year)
             Toast.makeText(requireContext(), "Perjalanan dimulai $interval hari lagi", Toast.LENGTH_SHORT).show()
