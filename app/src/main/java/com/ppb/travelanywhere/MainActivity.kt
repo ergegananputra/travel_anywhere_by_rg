@@ -53,21 +53,5 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun logout(view: View) {
-        val alertDialogBuilder = AlertDialog.Builder(this)
 
-        alertDialogBuilder.setTitle("Log Out")
-        alertDialogBuilder.setMessage("Are you sure you want to log out?")
-
-        alertDialogBuilder.setPositiveButton("Yes") { dialog, which ->
-            finish()
-        }
-
-        alertDialogBuilder.setNegativeButton("No") { dialog, which ->
-            // Dismiss the alert dialog.
-        }
-
-        val alertDialog = alertDialogBuilder.create()
-        alertDialog.show()
-    }
 }
