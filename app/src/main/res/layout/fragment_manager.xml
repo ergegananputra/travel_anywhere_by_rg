@@ -1,141 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:attr/colorBackground"
+    android:id="@+id/swipe_refresh_layout_manager"
     tools:context=".admin.ManagerFragment">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/materialCardView5"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_layout_manager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:cardBackgroundColor="?attr/colorPrimarySurface"
-        app:cardElevation="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="24dp">
-
-            <TextView
-                android:id="@+id/text_view_manager_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Welcome To Account Manager!"
-                android:textAppearance="@style/TextAppearance.MyApp.TitleLarge"
-                android:textColor="?attr/colorOnPrimarySurface"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/text_view_manager_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Fitur ini digunakan untuk mengelola akun pengguna dan admin. Harap taati peraturan yang berlaku."
-                android:textAppearance="@style/TextAppearance.MyApp.BodyLarge"
-                android:textColor="?attr/colorOnPrimarySurface"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_manager_label" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    </com.google.android.material.card.MaterialCardView>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:orientation="horizontal"
-        app:boxCornerRadiusBottomEnd="24dp"
-        app:boxCornerRadiusBottomStart="24dp"
-        app:boxCornerRadiusTopEnd="24dp"
-        app:boxCornerRadiusTopStart="24dp"
-        app:boxBackgroundColor="?attr/colorSurfaceContainerLow"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/materialCardView5"
-        app:layout_constraintTop_toBottomOf="@+id/materialCardView5">
-
-        <LinearLayout
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:cardBackgroundColor="?attr/colorPrimarySurface"
+            app:cardElevation="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/text_edit_search"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="24dp">
+
+                <TextView
+                    android:id="@+id/text_view_manager_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Welcome To Account Manager!"
+                    android:textAppearance="@style/TextAppearance.MyApp.TitleLarge"
+                    android:textColor="?attr/colorOnPrimarySurface"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_view_manager_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Fitur ini digunakan untuk mengelola akun pengguna dan admin. Harap taati peraturan yang berlaku."
+                    android:textAppearance="@style/TextAppearance.MyApp.BodyLarge"
+                    android:textColor="?attr/colorOnPrimarySurface"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_manager_label" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:orientation="horizontal"
+            app:endIconMode="clear_text"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="?attr/colorOnPrimaryContainer"
+            app:boxCornerRadiusBottomEnd="24dp"
+            app:boxCornerRadiusBottomStart="24dp"
+            app:boxCornerRadiusTopEnd="24dp"
+            app:boxCornerRadiusTopStart="24dp"
+            app:boxBackgroundColor="?attr/colorSurfaceContainerLow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/materialCardView5"
+            app:layout_constraintTop_toBottomOf="@+id/materialCardView5">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/text_edit_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Cari Username"
+                    android:drawableStart="@drawable/search_fill1_wght400_grad0_opsz24"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="?attr/colorOnPrimaryContainer"
+                    android:inputType="text"
+                    android:textColor="?attr/colorOnPrimaryContainer"
+                    android:maxLines="1" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested_scroll_view_manager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Cari Username"
-                android:inputType="text"
-                android:textColor="?attr/colorOnPrimaryContainer"
-                android:maxLines="1" />
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_search"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_rectangle"
-                android:backgroundTint="?attr/colorPrimaryContainer"
-                android:drawableStart="@drawable/search_fill1_wght400_grad0_opsz24"
-                android:drawableTint="?attr/colorOnPrimaryContainer"
-                android:paddingHorizontal="16dp"
-                android:text="Search"
-                android:textColor="?attr/colorOnPrimaryContainer"
-                app:layout_constraintBottom_toBottomOf="@+id/textInputLayout"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textInputLayout" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_manager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:paddingHorizontal="8dp"
+                    android:paddingBottom="150dp"
+                    android:clipToPadding="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/item_user" />
 
-        </LinearLayout>
+                <ProgressBar
+                    android:id="@+id/progress_bar_manager"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
 
 
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_manager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:paddingHorizontal="8dp"
-        android:paddingBottom="150dp"
-        android:clipToPadding="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
-        tools:itemCount="20"
-        tools:listitem="@layout/item_user" />
-
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/floating_action_button_database"
-        style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Primary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
-        android:text="Database"
-        android:textColor="?attr/colorOnPrimaryContainer"
-        app:backgroundTint="?attr/colorPrimaryContainer"
-        app:icon="@drawable/storage_fill1_wght400_grad0_opsz24"
-        app:iconTint="?attr/colorOnPrimaryContainer"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.core.widget.NestedScrollView>
 
 
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/floating_action_button_database"
+            style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Primary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
+            android:text="Database"
+            android:textColor="?attr/colorOnPrimaryContainer"
+            app:backgroundTint="?attr/colorPrimaryContainer"
+            app:icon="@drawable/storage_fill1_wght400_grad0_opsz24"
+            app:iconTint="?attr/colorOnPrimaryContainer"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

@@ -8,7 +8,7 @@ class ApplicationPreferencesManager(context : Context) {
     private val SPID : String = "username_id"
     private val SPROLE : String = "user_role"
     private val SPNAME : String = "username_name"
-    private val SPM : String = "username_email"
+    private val SPN : String = "username_nim"
 
     val usernameId: String?
         get() = sharedPreferences.getString(SPID, null)
@@ -21,8 +21,8 @@ class ApplicationPreferencesManager(context : Context) {
     val usernameName: String?
         get() = sharedPreferences.getString(SPNAME, null)
 
-    val usernameEmail: String?
-        get() = sharedPreferences.getString(SPM, null)
+    val usernameNim: String?
+        get() = sharedPreferences.getString(SPN, null)
 
     fun saveUsernameId(usernameId: String, role: String) {
         val expirationDate = Calendar.getInstance().apply {
@@ -37,14 +37,14 @@ class ApplicationPreferencesManager(context : Context) {
         }
     }
 
-    fun saveUserData(name: String, email : String) {
+    fun saveUserData(name: String, nim : String) {
         val expirationDate = Calendar.getInstance().apply {
             add(Calendar.DAY_OF_MONTH, 6)
         }.timeInMillis
 
         with(sharedPreferences.edit()) {
             putString(SPNAME, name)
-            putString(SPM, email)
+            putString(SPN, nim)
             putLong("uname_expiration_date", expirationDate)
             apply()
         }
@@ -62,7 +62,7 @@ class ApplicationPreferencesManager(context : Context) {
             remove(SPID)
             remove(SPROLE)
             remove(SPNAME)
-            remove(SPM)
+            remove(SPN)
             apply()
         }
     }

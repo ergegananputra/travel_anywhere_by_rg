@@ -62,7 +62,7 @@ class ProfileFragment : Fragment() {
     private fun setUsernameEmail() {
         val preferences = ApplicationPreferencesManager(requireContext())
         binding.textViewUsername.text = preferences.usernameName
-        binding.textViewEmail.text = preferences.usernameEmail
+        binding.textViewNim.text = preferences.usernameNim
 
         if (preferences.isUserAdmin) {
             binding.containerKelolaAccount.visibility = View.VISIBLE

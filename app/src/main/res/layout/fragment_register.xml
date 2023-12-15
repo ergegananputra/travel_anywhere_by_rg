@@ -70,6 +70,32 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
+            <TextView
+                android:id="@+id/text_nim_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NIM"
+                android:textColor="@color/white"
+                android:layout_marginBottom="10dp"
+                android:textAppearance="@style/TextAppearance.MyApp.LabelLarge" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/container_edit_text_nim_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_text_nim_register"
+                    android:layout_width="match_parent"
+                    android:inputType="text|number"
+                    android:hint="Input your identity number"
+                    style="@style/DesignSystem.TextInputEditText"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
 
 
 

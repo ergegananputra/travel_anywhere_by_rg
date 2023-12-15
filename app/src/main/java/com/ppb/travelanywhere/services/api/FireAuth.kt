@@ -3,6 +3,7 @@ package com.ppb.travelanywhere.services.api
 import android.util.Log
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.Source
+import com.ppb.travelanywhere.services.model.User
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
@@ -12,10 +13,11 @@ class FireAuth : FireConsole() {
 
 
 
-    suspend fun registerUser(username: String, email: String, password: String) : Boolean {
+    suspend fun registerUser(username: String, email: String, nim : String, password: String) : Boolean {
         val user = User(
             username = username,
             email = email,
+            nim = nim,
             password = password,
             user_auth_status = stringMap[false]!!
         )
@@ -107,6 +109,21 @@ class FireAuth : FireConsole() {
         }
     }
 
+    suspend fun updateUserRole(id: String, currRole: String) : String {
+        val newRole = if (currRole == roleUser) roleAdmin else roleUser
+        return suspendCoroutine { continuation ->
+            usersRef.document(id).update(field_role, newRole)
+                .addOnSuccessListener {
+                    Log.d("FireAuth", "User role updated")
+                    continuation.resume(newRole)
+                }
+                .addOnFailureListener { e ->
+                    Log.w("FireAuth", "Error updating user role", e)
+                    continuation.resume(currRole)
+                }
+        }
+    }
+
 
     /**
      *  Return Pair of Id and Role
@@ -136,6 +153,20 @@ class FireAuth : FireConsole() {
                 Log.e("FireAuth", "Error getting user id from username:", it)
                 continuation.resumeWithException(it)
             }
+        }
+    }
+
+    suspend fun deleteUser(id: String) : Boolean {
+        return suspendCoroutine { continuation ->
+            usersRef.document(id).delete()
+                .addOnSuccessListener {
+                    Log.d("FireAuth", "User deleted")
+                    continuation.resume(true)
+                }
+                .addOnFailureListener { e ->
+                    Log.w("FireAuth", "Error deleting user", e)
+                    continuation.resume(false)
+                }
         }
     }
 
@@ -218,7 +249,7 @@ class FireAuth : FireConsole() {
             }
     }
 
-    suspend fun getUsernameEmail(id: String): Pair<String?, String?> {
+    suspend fun getUsernameNim(id: String): Pair<String?, String?> {
         return suspendCoroutine { continuation ->
             usersRef.whereEqualTo(field_ID, id).get(Source.SERVER).addOnSuccessListener {
                 if (it.isEmpty) {
@@ -226,10 +257,25 @@ class FireAuth : FireConsole() {
                     continuation.resume(Pair(null, null))
                 } else {
                     val user = it.toObjects(User::class.java)[0]
-                    continuation.resume(Pair(user.username, user.email))
+                    continuation.resume(Pair(user.username, user.nim))
                 }
             }.addOnFailureListener {
                 Log.e("FireAuth", "Error getting username :", it)
+                continuation.resumeWithException(it)
+            }
+        }
+    }
+
+    suspend fun searchUserLocal(username: String) : MutableList<User> {
+        return suspendCoroutine { continuation ->
+            usersRef.whereGreaterThanOrEqualTo(field_username, username)
+                .whereLessThanOrEqualTo(field_username, username + '\uf8ff')
+                .get(Source.CACHE).addOnSuccessListener {
+                val usersList: MutableList<User> = it.toObjects(User::class.java)
+                Log.d("FireAuth", "User searched $usersList")
+                continuation.resume(usersList)
+            }.addOnFailureListener {
+                Log.e("FireAuth", "Error searching user :", it)
                 continuation.resumeWithException(it)
             }
         }
@@ -247,20 +293,14 @@ class FireAuth : FireConsole() {
         true to "log_in"
     )
 
-    data class User(
-        var id : String = "",
-        var username : String = "",
-        var email : String = "",
-        var password : String = "",
-        var role : String = "Role_User",
-        var user_auth_status : String = "log_out",
-        val createdAt : Any? = FieldValue.serverTimestamp(),
-        var updatedAt : Any? = FieldValue.serverTimestamp()
-    )
+    private val roleUser = "Role_User"
+    private val roleAdmin = "Role_Admin"
+
 
     private val field_ID = "id"
     private val field_username = "username"
     private val field_email = "email"
+    private val field_nim = "nim"
     private val field_password = "password"
     private val field_role = "role"
     private val field_isActive = "user_auth_status"

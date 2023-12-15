@@ -72,7 +72,7 @@ class RegisterFragment : Fragment() {
                     return@setOnClickListener
                 }
 
-                createUSerAccount(editTextUsernameRegister.text.toString(), editTextEmailRegister.text.toString(), editTextPasswordRegister.text.toString())
+                createUSerAccount(editTextUsernameRegister.text.toString().trim(), editTextEmailRegister.text.toString().trim(), editTextNimRegister.text.toString().trim(), editTextPasswordRegister.text.toString().trim())
 
 
             }
@@ -80,9 +80,9 @@ class RegisterFragment : Fragment() {
 
     }
 
-    private fun createUSerAccount(username: String, email: String, usrpwd: String) {
+    private fun createUSerAccount(username: String, email: String, nim : String, usrpwd: String) {
         lifecycleScope.launch {
-            if (fireAuth.registerUser(username, email, usrpwd)) {
+            if (fireAuth.registerUser(username, email, nim, usrpwd)) {
                 Toast.makeText(requireContext(), "Berhasil membuat akun", Toast.LENGTH_SHORT).show()
                 if (viewPagerCompanion != null) {
                     viewPagerCompanion!!.currentItem = 1

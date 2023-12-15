@@ -60,13 +60,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
+            android:ellipsize="marquee"
             android:text="1 Januari 1970"
+            android:maxLines="1"
             android:textAppearance="@style/TextAppearance.MyApp.TitleSmall"
             android:textColor="?attr/colorOnSurfaceVariant"
             app:layout_constraintBottom_toTopOf="@+id/text_kereta_nama"
-            app:layout_constraintEnd_toStartOf="@+id/button_active"
+            app:layout_constraintEnd_toStartOf="@+id/button_process"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -102,62 +103,79 @@
 
         <TextView
             android:id="@+id/text_asal"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Asal"
             android:textAppearance="@style/TextAppearance.MyApp.LabelMedium"
             android:textColor="?attr/colorOnSurface"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/line" />
 
         <TextView
             android:id="@+id/text_tujuan"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Tujuan"
+            android:textAlignment="textEnd"
             android:textAppearance="@style/TextAppearance.MyApp.LabelMedium"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toTopOf="@+id/text_asal" />
 
         <TextView
             android:id="@+id/kota_asal"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:text="Yogyakarta"
             android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
             android:textColor="?attr/colorOnSurface"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_asal" />
 
         <TextView
             android:id="@+id/stasiun_asal"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Tugu"
             android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
             android:textColor="?attr/colorOnSurface"
+            app:layout_constraintEnd_toEndOf="@+id/kota_asal"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/kota_asal" />
 
         <TextView
             android:id="@+id/kota_tujuan"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:text="Surabaya"
+            android:textAlignment="textEnd"
             android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
             android:textColor="?attr/colorOnSurface"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/text_tujuan" />
 
         <TextView
             android:id="@+id/stasiun_tujuan"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Gubeng"
+            android:textAlignment="textEnd"
             android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
             android:textColor="?attr/colorOnSurface"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/kota_tujuan"
             app:layout_constraintTop_toBottomOf="@+id/kota_tujuan" />
 
         <TextView
@@ -409,6 +427,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="?attr/colorOnSurfaceVariant" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

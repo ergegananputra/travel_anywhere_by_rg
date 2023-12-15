@@ -30,9 +30,6 @@
         android:label="fragment_manager"
         tools:layout="@layout/fragment_manager" >
         <action
-            android:id="@+id/action_managerFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
-        <action
             android:id="@+id/action_managerFragment_to_informationManagerFragment"
             app:destination="@id/informationManagerFragment" />
     </fragment>
@@ -40,9 +37,5 @@
         android:id="@+id/informationManagerFragment"
         android:name="com.ppb.travelanywhere.admin.InformationManagerFragment"
         android:label="fragment_information_manager"
-        tools:layout="@layout/fragment_information_manager" >
-        <action
-            android:id="@+id/action_informationManagerFragment_to_managerFragment"
-            app:destination="@id/managerFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_information_manager" />
 </navigation>

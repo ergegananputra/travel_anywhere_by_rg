@@ -39,16 +39,16 @@
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.MyApp.TitleLarge"
         android:textColor="?attr/colorOnBackground"
-        app:layout_constraintBottom_toTopOf="@+id/text_view_email"
+        app:layout_constraintBottom_toTopOf="@+id/text_view_nim"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/text_view_email"
+        android:id="@+id/text_view_nim"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="example@mail.com"
+        android:text="NIM - FIELD"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.MyApp.TitleMedium"
         android:textColor="?attr/colorOnBackground"
