@@ -116,6 +116,8 @@ class AppDatabaseViewModel(
     suspend fun listQueues () = appDatabaseRepository.listQueue()
     suspend fun showQueueList () = appDatabaseRepository.showListQueue()
 
+    suspend fun countQueue () = appDatabaseRepository.countQueue()
+
     fun insertQueue(
         targetTable : String,
         targetAction : String,

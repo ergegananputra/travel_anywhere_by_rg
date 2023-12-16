@@ -303,16 +303,16 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
                     }
                 )
             )
-                bottomSheet.globalAdapter.onClickItemListener = {
-                    Log.d("PesanActivity", "Kelas Kereta: $it")
-                    kelasKeretaViewModel.data.value = TrainClassesTable(
-                        id = it.id,
-                        name = it.name,
-                        weight = it.weight
-                    )
-                    bottomSheet.dismiss()
-                }
-                bottomSheet.show(supportFragmentManager, "TrainClassesSheetFragment")
+            bottomSheet.globalAdapter.onClickItemListener = {
+                Log.d("PesanActivity", "Kelas Kereta: $it")
+                kelasKeretaViewModel.data.value = TrainClassesTable(
+                    id = it.id,
+                    name = it.name,
+                    weight = it.weight
+                )
+                bottomSheet.dismiss()
+            }
+            bottomSheet.show(supportFragmentManager, "TrainClassesSheetFragment")
         }
 
         kelasKeretaViewModel.data.observe(this) {
