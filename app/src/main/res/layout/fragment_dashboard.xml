@@ -26,6 +26,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
 
+        android:maxLines="1"
+        android:ellipsize="marquee"
+
         android:layout_marginEnd="32dp"
         android:text="Hi, username!"
         android:textAppearance="@style/TextAppearance.MyApp.HeadlineSmall"

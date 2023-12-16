@@ -9,6 +9,7 @@ class ApplicationPreferencesManager(context : Context) {
     private val SPROLE : String = "user_role"
     private val SPNAME : String = "username_name"
     private val SPN : String = "username_nim"
+    private val SPIMAGE : String = "profile_image"
 
     val usernameId: String?
         get() = sharedPreferences.getString(SPID, null)
@@ -23,6 +24,16 @@ class ApplicationPreferencesManager(context : Context) {
 
     val usernameNim: String?
         get() = sharedPreferences.getString(SPN, null)
+
+    val profileImage: String?
+        get() = sharedPreferences.getString(SPIMAGE, null)
+
+    fun saveProfileImage(imageUri: String) {
+        with(sharedPreferences.edit()) {
+            putString(SPIMAGE, imageUri)
+            apply()
+        }
+    }
 
     fun saveUsernameId(usernameId: String, role: String) {
         val expirationDate = Calendar.getInstance().apply {
@@ -63,6 +74,7 @@ class ApplicationPreferencesManager(context : Context) {
             remove(SPROLE)
             remove(SPNAME)
             remove(SPN)
+            remove(SPIMAGE)
             apply()
         }
     }

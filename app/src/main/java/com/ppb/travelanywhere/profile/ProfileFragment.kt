@@ -1,19 +1,25 @@
 package com.ppb.travelanywhere.profile
 
+import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import coil.load
+import coil.transform.CircleCropTransformation
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.ppb.travelanywhere.R
 import com.ppb.travelanywhere.SystemThemeViewModel
@@ -26,12 +32,45 @@ import com.ppb.travelanywhere.services.database.AppDatabaseViewModelFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.File
+import java.io.FileOutputStream
 
 
 class ProfileFragment : Fragment() {
     private val binding by lazy { FragmentProfileBinding.inflate(layoutInflater) }
     private val systemThemeViewModel: SystemThemeViewModel by activityViewModels()
     private lateinit var appViewModel : AppDatabaseViewModel
+
+    private var imageUri: Uri? = null
+    private val launcherPhoto = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+
+        if (result.resultCode == Activity.RESULT_OK) {
+            imageUri = result.data?.data
+
+            val newFile = File(requireContext().filesDir, "profile_image.jpg")
+
+            val inputStream = requireContext().contentResolver.openInputStream(imageUri!!)
+
+            val outputStream = FileOutputStream(newFile)
+
+            inputStream?.copyTo(outputStream)
+
+            inputStream?.close()
+            outputStream.close()
+
+            val newUri = Uri.fromFile(newFile)
+
+            val preferences = ApplicationPreferencesManager(requireContext())
+            preferences.saveProfileImage(newUri.toString())
+
+            loadImage(newUri)
+
+            Toast.makeText(requireContext(), "Berhasil memilih gambar", Toast.LENGTH_SHORT).show()
+        }
+
+    }
 
 
     override fun onCreateView(
@@ -49,6 +88,8 @@ class ProfileFragment : Fragment() {
         val factory = AppDatabaseViewModelFactory((requireActivity().application as TravelAnywhereApps).appRepository)
         appViewModel = ViewModelProvider(requireActivity(), factory)[AppDatabaseViewModel::class.java]
 
+        checkProfileImage()
+
         setUsernameEmail()
 
 
@@ -56,24 +97,61 @@ class ProfileFragment : Fragment() {
 
         adminManager()
 
+        binding.buttonImageViewUnggahFotoProfilBaru.setOnClickListener {
+            pickPhoto()
+        }
+
+
+        binding.buttonImageViewDeleteAccount.setOnClickListener {
+            alertConfirmation(true)
+        }
 
         binding.buttonLogOut.setOnClickListener {
-            MaterialAlertDialogBuilder(requireContext(), R.style.CustomAlertDialog)
-                .setTitle("Keluar")
-                .setMessage("Apakah Anda yakin ingin keluar?")
-                .setPositiveButton("Batal", null)
-                .setNegativeButton("Ya") { _, _ ->
-                    logout()
-                }
-                .show()
+            alertConfirmation()
+
         }
+    }
+
+    private fun checkProfileImage() {
+        val preferences = ApplicationPreferencesManager(requireContext())
+        val localPath = preferences.profileImage
+        Log.d("ProfileFragment", "checkProfileImage: $localPath")
+
+        if (localPath != null) {
+            imageUri = Uri.parse(localPath)
+            imageUri?.let {
+                loadImage(it)
+            }
+        }
+
+    }
+
+    private fun alertConfirmation(isDeleteAccountToo : Boolean = false) {
+        MaterialAlertDialogBuilder(requireContext(), R.style.CustomAlertDialog)
+            .setTitle("Keluar")
+            .setMessage("Apakah Anda yakin ingin keluar?")
+            .setPositiveButton("Batal", null)
+            .setNegativeButton("Ya") { _, _ ->
+                if (isDeleteAccountToo) {
+                    lifecycleScope.launch {
+                        val fireAuth = FireAuth()
+                        fireAuth.deleteUser(ApplicationPreferencesManager(requireContext()).usernameId!!)
+                        Toast.makeText(requireContext(), "Akun berhasil dihapus", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                logout()
+            }
+            .show()
     }
 
     private fun adminManager() {
         binding.containerKelolaAccount.setOnClickListener {
             val action = ProfileFragmentDirections.actionProfileFragmentToManagerFragment()
             findNavController().navigate(action)
-
+        }
+        binding.buttonImageViewManagerAccount.setOnClickListener {
+            val action = ProfileFragmentDirections.actionProfileFragmentToManagerFragment()
+            findNavController().navigate(action)
         }
     }
 
@@ -110,6 +188,24 @@ class ProfileFragment : Fragment() {
             systemThemeViewModel.switchLabel.value = binding.switchThemeMode.text.toString()
 
         }
+    }
+
+    private fun pickPhoto() {
+        val mediaStoreIntent = Intent(Intent.ACTION_PICK).apply {
+            setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
+        }
+        launcherPhoto.launch(mediaStoreIntent)
+    }
+
+    private fun loadImage(localPath: Uri) {
+        // load image
+        binding.imageViewProfile.load(localPath) {
+            crossfade(true)
+            transformations(CircleCropTransformation())
+            placeholder(R.drawable.person_fill1_wght400_grad0_opsz24)
+            error(R.drawable.person_fill1_wght400_grad0_opsz24)
+        }
+        Log.d("ProfileFragment", "loadImage: $localPath")
     }
 
 

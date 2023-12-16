@@ -98,8 +98,9 @@ class DashboardFragment : Fragment() {
     private fun setUsername() {
         val preferences = ApplicationPreferencesManager(requireContext())
         Log.d("DashboardFragment", "setUsername: ${preferences.usernameName}")
-        val username = "Hi, ${preferences.usernameName} !"
-        binding.textUsername.text = username
+        val username = preferences.usernameName ?: "Welcome to Travel Anywhere"
+        val greeting = "Hi, $username !"
+        binding.textUsername.text = greeting
     }
 
     private fun refreshPage() {
