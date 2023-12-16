@@ -1,6 +1,11 @@
 package com.ppb.travelanywhere.pesan
 
+import android.app.AlarmManager
 import android.app.DatePickerDialog
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -35,6 +40,7 @@ import com.ppb.travelanywhere.services.database.stations.StationsTable
 import com.ppb.travelanywhere.services.database.train_classes.TrainClassesTable
 import com.ppb.travelanywhere.services.database.trains.TrainsTable
 import com.ppb.travelanywhere.services.model.PaketModel
+import com.ppb.travelanywhere.services.notification.NotifReceiver
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -161,6 +167,30 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
                 }
 
                 Toast.makeText(this@PesanActivity, "Berhasil Checkout", Toast.LENGTH_SHORT).show()
+
+                val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+                val intent = Intent(this@PesanActivity, NotifReceiver::class.java).apply {
+                    putExtra("MESSAGE", "Keretamu akan berangkat tanggal ${binding.textViewTanggalKeberangkatan} ini. ${keretaViewModel.data.value!!.name} dari ${stasiunKeberangkatanViewModel.data.value!!.name} menuju ${stasiunKedatanganViewModel.data.value!!.name}")
+                    putExtra("TITLE", "Siapkan dirimu untuk Besok!")
+                }
+                val pendingIntent = PendingIntent.getBroadcast(this@PesanActivity, 0, intent, PendingIntent.FLAG_MUTABLE)
+
+                val calendar = Calendar.getInstance().apply {
+                    timeInMillis = selectedDate!!.time
+                    add(Calendar.DAY_OF_YEAR, -1)
+                }
+
+                if (Calendar.getInstance().after(calendar)) {
+                    val message = "Keretamu akan berangkat hari ini. ${keretaViewModel.data.value!!.name} dari ${stasiunKeberangkatanViewModel.data.value!!.name} menuju ${stasiunKedatanganViewModel.data.value!!.name}"
+                    (application as TravelAnywhereApps).showNotification("Your trip is TODAY!", message)
+                } else {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && alarmManager.canScheduleExactAlarms()) {
+                        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
+                    }
+                }
+
+
+
 
                 // Finish Activity
                 setResult(RESULT_OK)

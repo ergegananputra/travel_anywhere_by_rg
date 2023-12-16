@@ -1,13 +1,20 @@
 package com.ppb.travelanywhere.authenticate
 
+import android.app.AlarmManager
+import android.app.AlertDialog
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.util.TypedValue
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import android.view.WindowManager
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
@@ -50,7 +57,7 @@ class WelcomeActivity : AppCompatActivity() {
                 if (isActive) {
                     val intentToMainActivity = Intent(this@WelcomeActivity, MainActivity::class.java)
                     startActivity(intentToMainActivity)
-//                    finish()
+                    finish()
                 }
                 Log.d("WelcomeActivity", "onCreate: ${ApplicationPreferencesManager(this@WelcomeActivity).usernameId}")
             }
