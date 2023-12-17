@@ -97,7 +97,10 @@ class LoginFragment : Fragment() {
                 requireActivity().finish()
 
             } else {
-                Toast.makeText(requireContext(), "Username atau password salah", Toast.LENGTH_SHORT).show()
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(requireActivity(), "Username atau password salah", Toast.LENGTH_SHORT).show()
+                }
+
 
             }
         }

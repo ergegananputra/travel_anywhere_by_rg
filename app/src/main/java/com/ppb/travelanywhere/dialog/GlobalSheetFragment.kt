@@ -1,19 +1,14 @@
 package com.ppb.travelanywhere.dialog
 
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.ppb.travelanywhere.databinding.FragmentBottomSheetDialogBinding
 import com.ppb.travelanywhere.dialog.adapter.GlobalTypeAdapter
-import com.ppb.travelanywhere.dialog.viewmodel.GlobalViewModel
 
 class GlobalSheetFragment<T>(
     private val title : String,
@@ -73,6 +68,20 @@ class GlobalSheetFragment<T>(
 
     fun closeDialog() {
         dismiss()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        isDialogOpen = true
+    }
+
+    override fun onStop() {
+        super.onStop()
+        isDialogOpen = false
+    }
+
+    companion object {
+        var isDialogOpen = false
     }
 
 }

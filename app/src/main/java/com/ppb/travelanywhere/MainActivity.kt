@@ -2,19 +2,14 @@ package com.ppb.travelanywhere
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.util.TypedValue
-import android.view.View
 import android.view.WindowManager
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.ppb.travelanywhere.databinding.ActivityMainBinding
-import com.ppb.travelanywhere.services.api.FireSeederFactory
 
 class MainActivity : AppCompatActivity() {
 

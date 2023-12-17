@@ -7,7 +7,6 @@ import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
-import androidx.core.app.ServiceCompat.startForeground
 import com.ppb.travelanywhere.services.database.AppDatabaseRepository
 import com.ppb.travelanywhere.services.database.queue.DbQueueDatabase
 import com.ppb.travelanywhere.services.database.stations.StationsDatabase

@@ -1,23 +1,17 @@
 package com.ppb.travelanywhere.admin
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.firestore.Source
-import com.google.firebase.firestore.toObjects
-import com.ppb.travelanywhere.R
 import com.ppb.travelanywhere.adapter.UsersManagerAdapter
 import com.ppb.travelanywhere.databinding.FragmentManagerBinding
-import com.ppb.travelanywhere.profile.ProfileFragmentDirections
 import com.ppb.travelanywhere.services.api.FireAuth
 import com.ppb.travelanywhere.services.api.FireConsole
 import com.ppb.travelanywhere.services.model.User

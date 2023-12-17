@@ -5,7 +5,6 @@ import android.app.DatePickerDialog
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -24,14 +23,10 @@ import com.ppb.travelanywhere.authenticate.WelcomeActivity
 import com.ppb.travelanywhere.databinding.ActivityPesanBinding
 import com.ppb.travelanywhere.dialog.GlobalSheetFragment
 import com.ppb.travelanywhere.dialog.adapter.GlobalTypeAdapter
-import com.ppb.travelanywhere.dialog.viewmodel.GlobalViewModel
 import com.ppb.travelanywhere.dialog.viewmodel.StationsKeberangkatanViewModel
 import com.ppb.travelanywhere.dialog.viewmodel.StationsKedatanganViewModel
-import com.ppb.travelanywhere.dialog.viewmodel.StationsViewModelFactory
 import com.ppb.travelanywhere.dialog.viewmodel.TrainClassesViewModel
-import com.ppb.travelanywhere.dialog.viewmodel.TrainClassesViewModelFactory
 import com.ppb.travelanywhere.dialog.viewmodel.TrainsViewModel
-import com.ppb.travelanywhere.dialog.viewmodel.TrainsViewModelFactory
 import com.ppb.travelanywhere.services.calendar.CalendarModule
 import com.ppb.travelanywhere.services.database.AppDatabaseViewModel
 import com.ppb.travelanywhere.services.database.AppDatabaseViewModelFactory
@@ -292,6 +287,10 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
     private fun kereta(list: List<TrainsTable>) {
         binding.textViewPilihanKereta.setOnClickListener {
+            if (GlobalSheetFragment.isDialogOpen) {
+                return@setOnClickListener
+            }
+
             val bottomSheet = GlobalSheetFragment<TrainsTable>(
                 title = "Pilih Kereta",
                 globalAdapter = GlobalTypeAdapter<TrainsTable>(
@@ -342,6 +341,15 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
     private fun kelasKereta(list: List<TrainClassesTable>) {
         binding.buttonPilihKelasKereta.setOnClickListener {
+            if (previousTrainPrice == 0) {
+                Toast.makeText(this, "Pilih Kereta Terlebih Dahulu", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (GlobalSheetFragment.isDialogOpen) {
+                return@setOnClickListener
+            }
+
             val bottomSheet = GlobalSheetFragment<TrainClassesTable>(
                 title = "Pilih Kelas Kereta",
                 globalAdapter = GlobalTypeAdapter<TrainClassesTable>(
@@ -384,6 +392,10 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
     private fun stasiunKedatangan(list: List<StationsTable>) {
         binding.buttonPilihStasiunKedatangan.setOnClickListener {
+            if (GlobalSheetFragment.isDialogOpen) {
+                return@setOnClickListener
+            }
+
             val bottomSheet = GlobalSheetFragment<StationsTable>(
                 title = "Pilih Stasiun Kedatangan",
                 globalAdapter = GlobalTypeAdapter<StationsTable>(
@@ -440,6 +452,10 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
     private fun stasiunKeberangkatan(list : List<StationsTable>) {
         binding.buttonPilihStasiunKeberangkatan.setOnClickListener {
+            if (GlobalSheetFragment.isDialogOpen) {
+                return@setOnClickListener
+            }
+
             val bottomSheet = GlobalSheetFragment<StationsTable>(
                 title = "Pilih Stasiun Keberangkatan",
                 globalAdapter = GlobalTypeAdapter<StationsTable>(

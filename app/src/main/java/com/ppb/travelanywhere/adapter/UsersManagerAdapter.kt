@@ -1,9 +1,7 @@
 package com.ppb.travelanywhere.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -13,7 +11,6 @@ import com.ppb.travelanywhere.services.api.FireAuth
 import com.ppb.travelanywhere.services.model.User
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class UsersManagerAdapter(
     private val scope: CoroutineScope

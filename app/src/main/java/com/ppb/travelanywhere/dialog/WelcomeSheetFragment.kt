@@ -13,7 +13,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.ppb.travelanywhere.R
 import com.ppb.travelanywhere.adapter.TabAdapter
 import com.ppb.travelanywhere.databinding.FragmentBottomWelcomeScreenLayoutBinding
-import com.ppb.travelanywhere.services.ApplicationPreferencesManager
 
 
 class WelcomeSheetFragment : BottomSheetDialogFragment() {
