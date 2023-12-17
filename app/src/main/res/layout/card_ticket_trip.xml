@@ -64,6 +64,7 @@
             android:ellipsize="marquee"
             android:text="1 Januari 1970"
             android:maxLines="1"
+            android:freezesText="true"
             android:marqueeRepeatLimit="marquee_forever"
             android:focusable="true"
             android:focusableInTouchMode="true"
@@ -222,6 +223,7 @@
                     android:layout_height="wrap_content"
                     android:text="Pemandangan Panorama"
                     android:maxLines="1"
+                    android:freezesText="true"
                     android:ellipsize="marquee"
                     android:marqueeRepeatLimit="marquee_forever"
                     android:focusable="true"
@@ -254,6 +256,7 @@
                     android:text="Minuman Signature"
                     android:maxLines="1"
                     android:ellipsize="marquee"
+                    android:freezesText="true"
                     android:marqueeRepeatLimit="marquee_forever"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
@@ -283,6 +286,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Makanan Berat"
+                    android:freezesText="true"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:singleLine="true"
                     android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
                     android:textColor="?attr/colorSecondary" />
 
@@ -341,6 +349,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Makanan Ringan"
+                    android:freezesText="true"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:singleLine="true"
                     android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
                     android:textColor="?attr/colorSecondary" />
 
@@ -405,6 +418,7 @@
                     android:focusable="true"
                     android:focusableInTouchMode="true"
                     android:singleLine="true"
+                    android:freezesText="true"
                     android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
                     android:textColor="?attr/colorSecondary" />
 

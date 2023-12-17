@@ -114,11 +114,12 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
             window.attributes = attributes
         }
 
-        marqueeSupport()
+
         pilihTanggalKeberangkatan()
         setUpRecyclerPaket()
 
         observeDataForPrice()
+        marqueeSupport()
 
 
         // Check Out

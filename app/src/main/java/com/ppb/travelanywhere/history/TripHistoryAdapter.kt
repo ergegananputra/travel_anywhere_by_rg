@@ -24,7 +24,7 @@ class TripHistoryAdapter(
         private val binding : CardTicketTripBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(ticketHistoryTable: TicketHistoryTable) {
-
+            marqueeSupport()
             with(binding) {
 
 
@@ -97,6 +97,17 @@ class TripHistoryAdapter(
 
             }
 
+        }
+
+        private fun marqueeSupport() {
+            binding.textKeretaTanggal.isSelected = true
+            binding.paket1.isSelected = true
+            binding.paket2.isSelected = true
+            binding.paket3.isSelected = true
+            binding.paket4.isSelected = true
+            binding.paket5.isSelected = true
+            binding.paket6.isSelected = true
+            binding.paket7.isSelected = true
         }
 
         private fun setDate(date: Date?, view: TextView) {

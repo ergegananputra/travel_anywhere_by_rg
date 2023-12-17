@@ -68,11 +68,38 @@ class DashboardFragment : Fragment() {
         setUsername()
 
         setFloatingActionButton()
+        setCalendarView()
 
         refreshPage()
 
 
 
+    }
+
+    private fun setCalendarView() {
+        binding.calendarView.setOnDateChangeListener { calendarView, year, month, dayOfMonts ->
+            val calendar = Calendar.getInstance()
+            calendar.set(year, month, dayOfMonts)
+
+            val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+            val monthOfYear = calendar.get(Calendar.MONTH)
+            val yearOfDate = calendar.get(Calendar.YEAR)
+
+            // create notification if there is a trip on that day
+            lifecycleScope.launch {
+                val ticketHistory = withContext(Dispatchers.IO) {
+                    appViewModel.listTicketHistory()?.contains(TicketHistoryTable(
+                        tanggalKeberangkatan = calendar.time
+                    )) ?: false
+                }
+
+                if (ticketHistory) {
+                    Toast.makeText(requireContext(), "Ada perjalanan pada tanggal $dayOfMonth ${resources.getStringArray(R.array.months)[monthOfYear]} $yearOfDate", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(requireContext(), "Tidak ada perjalanan pada tanggal $dayOfMonth ${resources.getStringArray(R.array.months)[monthOfYear]} $yearOfDate", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
     private fun marqueeSupport() {
