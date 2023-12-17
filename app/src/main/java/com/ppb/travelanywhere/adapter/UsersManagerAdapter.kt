@@ -29,6 +29,7 @@ class UsersManagerAdapter(
                 buttonRole.setOnClickListener {
                     scope.launch {
                         val newRole = FireAuth().updateUserRole(user.id, user.role)
+                        user.role = newRole
                         buttonRole.text = newRole.removePrefix("Role_").lowercase()
                     }
                 }

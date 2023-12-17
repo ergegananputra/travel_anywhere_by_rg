@@ -114,7 +114,7 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
             window.attributes = attributes
         }
 
-
+        marqueeSupport()
         pilihTanggalKeberangkatan()
         setUpRecyclerPaket()
 
@@ -202,6 +202,14 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
     }
 
+    private fun marqueeSupport() {
+        binding.textViewTanggalKeberangkatan.isSelected = true
+        binding.buttonPilihStasiunKedatangan.isSelected = true
+        binding.buttonPilihStasiunKeberangkatan.isSelected = true
+        binding.buttonPilihKelasKereta.isSelected = true
+        binding.textViewPilihanKereta.isSelected = true
+    }
+
     private fun observeDataForPrice() {
         totalPrice.observe(this) {
             val newPrice = "Rp. $it"
@@ -283,13 +291,14 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
             val bottomSheet = GlobalSheetFragment<TrainsTable>(
                 title = "Pilih Kereta",
                 globalAdapter = GlobalTypeAdapter<TrainsTable>(
-                    list = list,
+                    list = list.toMutableList(),
                     onClickItemListener = {},
                     textLabelLogic = { itemBinding, train ->
                         Log.d("PesanActivity", "Kereta: $train")
                         itemBinding.textViewOptionItem.text = train.name
                     }
-                )
+                ),
+                searchFeatures = true
             )
             bottomSheet.globalAdapter.onClickItemListener = {
                 Log.d("PesanActivity", "Kereta: $it")
@@ -300,6 +309,13 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
                 )
                 bottomSheet.dismiss()
             }
+            bottomSheet.searchLogic = {
+                lifecycleScope.launch {
+                    val searchResult = appViewModel.searchTrains(it)
+                    bottomSheet.globalAdapter.updateList(searchResult)
+                }
+            }
+
             bottomSheet.show(supportFragmentManager, "TrainsSheetFragment")
         }
 
@@ -325,13 +341,13 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
             val bottomSheet = GlobalSheetFragment<TrainClassesTable>(
                 title = "Pilih Kelas Kereta",
                 globalAdapter = GlobalTypeAdapter<TrainClassesTable>(
-                    list = list,
+                    list = list.toMutableList(),
                     onClickItemListener = {},
                     textLabelLogic = { itemBinding, trainClass ->
                         Log.d("PesanActivity", "Kelas Kereta: $trainClass")
                         itemBinding.textViewOptionItem.text = trainClass.name
                     }
-                )
+                ),
             )
             bottomSheet.globalAdapter.onClickItemListener = {
                 Log.d("PesanActivity", "Kelas Kereta: $it")
@@ -367,14 +383,15 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
             val bottomSheet = GlobalSheetFragment<StationsTable>(
                 title = "Pilih Stasiun Kedatangan",
                 globalAdapter = GlobalTypeAdapter<StationsTable>(
-                    list = list,
+                    list = list.toMutableList(),
                     onClickItemListener = {},
                     textLabelLogic = { itemBinding, station ->
                         Log.d("PesanActivity", "Stasiun Kedatangan: $station")
                         val option = "${station.city}, ${station.name}"
                         itemBinding.textViewOptionItem.text = option
                     }
-                )
+                ),
+                searchFeatures = true
             )
             bottomSheet.globalAdapter.onClickItemListener = {
                 Log.d("PesanActivity", "Stasiun Kedatangan: $it")
@@ -386,6 +403,13 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
                 )
                 bottomSheet.dismiss()
             }
+            bottomSheet.searchLogic = {
+                lifecycleScope.launch {
+                    val searchResult = appViewModel.searchStations(it)
+                    bottomSheet.globalAdapter.updateList(searchResult)
+                }
+            }
+
             bottomSheet.show(supportFragmentManager, "StationsSheetFragment")
         }
 
@@ -415,14 +439,15 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
             val bottomSheet = GlobalSheetFragment<StationsTable>(
                 title = "Pilih Stasiun Keberangkatan",
                 globalAdapter = GlobalTypeAdapter<StationsTable>(
-                    list = list,
+                    list = list.toMutableList(),
                     onClickItemListener = {},
                     textLabelLogic = { itemBinding, station ->
                         Log.d("PesanActivity", "Stasiun Kedatangan: $station")
                         val option = "${station.city}, ${station.name}"
                         itemBinding.textViewOptionItem.text = option
                     }
-                )
+                ),
+                searchFeatures = true
             )
             bottomSheet.globalAdapter.onClickItemListener = {
                 Log.d("PesanActivity", "Stasiun Keberangkatan: $it")
@@ -434,6 +459,13 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
                 )
                 bottomSheet.dismiss()
             }
+            bottomSheet.searchLogic = {
+                lifecycleScope.launch {
+                    val searchResult = appViewModel.searchStations(it)
+                    bottomSheet.globalAdapter.updateList(searchResult)
+                }
+            }
+
             bottomSheet.show(supportFragmentManager, "StationsSheetFragment")
         }
 

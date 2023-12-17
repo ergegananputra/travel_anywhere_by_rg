@@ -7,7 +7,7 @@ import com.ppb.travelanywhere.databinding.ItemRecyclerGlobalBinding
 
 
 class GlobalTypeAdapter<T>(
-    private val list: List<T>,
+    private val list: MutableList<T>,
     var onClickItemListener: (T) -> Unit,
     private val textLabelLogic: (ItemRecyclerGlobalBinding, T) -> Unit
 ) : RecyclerView.Adapter<GlobalTypeAdapter<T>.GlobalTypeViewHolder>() {
@@ -15,6 +15,8 @@ class GlobalTypeAdapter<T>(
         private val binding : ItemRecyclerGlobalBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(t: T) {
+            marqueeSupport()
+
             with(binding) {
                 textLabelLogic(this, t)
 
@@ -27,7 +29,19 @@ class GlobalTypeAdapter<T>(
             }
         }
 
+        private fun marqueeSupport() {
+            binding.textViewOptionItem.isSelected = true
+        }
 
+
+    }
+
+
+
+    fun updateList(newList: List<T>) {
+        list.clear()
+        list.addAll(newList)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GlobalTypeViewHolder {

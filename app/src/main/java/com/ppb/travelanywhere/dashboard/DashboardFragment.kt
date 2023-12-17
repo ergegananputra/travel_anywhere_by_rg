@@ -64,6 +64,7 @@ class DashboardFragment : Fragment() {
         appViewModel = ViewModelProvider(requireActivity(), factory)[AppDatabaseViewModel::class.java]
 
 
+        marqueeSupport()
         setUsername()
 
         setFloatingActionButton()
@@ -72,6 +73,10 @@ class DashboardFragment : Fragment() {
 
 
 
+    }
+
+    private fun marqueeSupport() {
+        binding.textUsername.isSelected = true
     }
 
 

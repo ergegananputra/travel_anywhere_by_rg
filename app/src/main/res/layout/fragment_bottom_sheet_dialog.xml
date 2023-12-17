@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginTop="150dp"
     app:cardCornerRadius="16dp"
     app:cardBackgroundColor="?attr/colorSurfaceContainerHigh"
     >
@@ -36,15 +35,50 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_input_layout_search_sheet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:orientation="horizontal"
+            app:boxBackgroundColor="?attr/colorSurfaceContainerHigh"
+            app:boxBackgroundMode="none"
+            app:boxCornerRadiusBottomEnd="24dp"
+            app:boxCornerRadiusBottomStart="24dp"
+            app:boxCornerRadiusTopEnd="24dp"
+            app:boxCornerRadiusTopStart="24dp"
+            app:endIconMode="clear_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_title_bottom_sheet">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/text_edit_search_sheet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableStart="@drawable/search_fill1_wght400_grad0_opsz24"
+                android:drawablePadding="8dp"
+                android:drawableTint="?attr/colorOnPrimaryContainer"
+                android:hint="Pencarian"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="?attr/colorOnPrimaryContainer" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_sheet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:paddingHorizontal="32dp"
+            android:layout_marginBottom="50dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_title_bottom_sheet"
+            app:layout_constraintTop_toBottomOf="@+id/text_input_layout_search_sheet"
             tools:listitem="@layout/item_recycler_global" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

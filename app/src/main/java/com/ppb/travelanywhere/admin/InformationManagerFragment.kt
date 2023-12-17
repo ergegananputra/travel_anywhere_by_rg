@@ -8,20 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import coil.load
 import com.ppb.travelanywhere.R
 import com.ppb.travelanywhere.TravelAnywhereApps
 import com.ppb.travelanywhere.databinding.FragmentInformationManagerBinding
 import com.ppb.travelanywhere.dialog.GlobalSheetFragment
 import com.ppb.travelanywhere.dialog.adapter.GlobalTypeAdapter
-import com.ppb.travelanywhere.dialog.viewmodel.StationsKedatanganViewModel
-import com.ppb.travelanywhere.dialog.viewmodel.TrainClassesViewModel
-import com.ppb.travelanywhere.dialog.viewmodel.TrainsViewModel
 import com.ppb.travelanywhere.services.database.AppDatabaseViewModel
 import com.ppb.travelanywhere.services.database.AppDatabaseViewModelFactory
 import com.ppb.travelanywhere.services.database.DatabaseInformationManager
@@ -114,14 +109,15 @@ class InformationManagerFragment : Fragment() {
                 val bottomSheet = GlobalSheetFragment<StationsTable>(
                     title = "Pilih Stasiun Keberangkatan",
                     globalAdapter = GlobalTypeAdapter<StationsTable>(
-                        list = list,
+                        list = list.toMutableList(),
                         onClickItemListener = {},
                         textLabelLogic = { itemBinding, station ->
                             Log.d("InformationManagerFragment", "Stasiun Kedatangan: $station")
                             val option = "${station.city}, ${station.name}"
                             itemBinding.textViewOptionItem.text = option
                         }
-                    )
+                    ),
+                    searchFeatures = true,
                 )
                 bottomSheet.globalAdapter.onClickItemListener = {
                     Log.d("InformationManagerFragment", "Stasiun Keberangkatan: $it")
@@ -139,6 +135,13 @@ class InformationManagerFragment : Fragment() {
                     bottomSheet.dismiss()
                     changeIconToEditMode()
                 }
+                bottomSheet.searchLogic = { query ->
+                    lifecycleScope.launch {
+                        val results = appViewModel.searchStations(query)
+                        bottomSheet.globalAdapter.updateList(results)
+                    }
+                }
+
                 bottomSheet.show(requireActivity().supportFragmentManager, "StationsSheetFragment")
 
 
@@ -148,13 +151,14 @@ class InformationManagerFragment : Fragment() {
                 val bottomSheet = GlobalSheetFragment<TrainsTable>(
                     title = "Pilih Kereta",
                     globalAdapter = GlobalTypeAdapter<TrainsTable>(
-                        list = list,
+                        list = list.toMutableList(),
                         onClickItemListener = {},
                         textLabelLogic = { itemBinding, train ->
                             Log.d("InformationManagerFragment", "Kereta: $train")
                             itemBinding.textViewOptionItem.text = train.name
                         }
-                    )
+                    ),
+                    searchFeatures = true,
                 )
                 bottomSheet.globalAdapter.onClickItemListener = {
                     Log.d("InformationManagerFragment", "Kereta: $it")
@@ -170,6 +174,13 @@ class InformationManagerFragment : Fragment() {
                     bottomSheet.dismiss()
                     changeIconToEditMode()
                 }
+                bottomSheet.searchLogic = { query ->
+                    lifecycleScope.launch {
+                        val results = appViewModel.searchTrains(query)
+                        bottomSheet.globalAdapter.updateList(results)
+                    }
+                }
+
                 bottomSheet.show(requireActivity().supportFragmentManager, "TrainsSheetFragment")
 
             } else if (optionDb == 2) {
@@ -178,13 +189,14 @@ class InformationManagerFragment : Fragment() {
                 val bottomSheet = GlobalSheetFragment<TrainClassesTable>(
                     title = "Pilih Kelas Kereta",
                     globalAdapter = GlobalTypeAdapter<TrainClassesTable>(
-                        list = list,
+                        list = list.toMutableList(),
                         onClickItemListener = {},
                         textLabelLogic = { itemBinding, trainClass ->
                             Log.d("InformationManagerFragment", "Kelas Kereta: $trainClass")
                             itemBinding.textViewOptionItem.text = trainClass.name
                         }
-                    )
+                    ),
+                    searchFeatures = true,
                 )
                 bottomSheet.globalAdapter.onClickItemListener = {
                     Log.d("InformationManagerFragment", "Kelas Kereta: $it")
@@ -200,6 +212,13 @@ class InformationManagerFragment : Fragment() {
                     bottomSheet.dismiss()
                     changeIconToEditMode()
                 }
+                bottomSheet.searchLogic = { query ->
+                    lifecycleScope.launch {
+                        val results = appViewModel.searchTrainClasses(query)
+                        bottomSheet.globalAdapter.updateList(results)
+                    }
+                }
+
                 bottomSheet.show(requireActivity().supportFragmentManager, "TrainClassesSheetFragment")
             }
         }

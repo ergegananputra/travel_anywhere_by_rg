@@ -64,6 +64,10 @@
             android:ellipsize="marquee"
             android:text="1 Januari 1970"
             android:maxLines="1"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:singleLine="true"
             android:textAppearance="@style/TextAppearance.MyApp.TitleSmall"
             android:textColor="?attr/colorOnSurfaceVariant"
             app:layout_constraintBottom_toTopOf="@+id/text_kereta_nama"
@@ -217,6 +221,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Pemandangan Panorama"
+                    android:maxLines="1"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:singleLine="true"
                     android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
                     android:textColor="?attr/colorSecondary" />
 
@@ -242,6 +252,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Minuman Signature"
+                    android:maxLines="1"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:singleLine="true"
                     android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
                     android:textColor="?attr/colorSecondary" />
 
@@ -293,6 +309,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Akses Film"
+                    android:maxLines="1"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:singleLine="true"
                     android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
                     android:textColor="?attr/colorSecondary" />
 
@@ -345,6 +367,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Jaminan Duduk Dekat Jendela"
+                    android:maxLines="1"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:singleLine="true"
                     android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
                     android:textColor="?attr/colorSecondary" />
 
@@ -371,6 +399,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Berkebutuhan Khusus"
+                    android:maxLines="1"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:singleLine="true"
                     android:textAppearance="@style/TextAppearance.MyApp.LabelLarge"
                     android:textColor="?attr/colorSecondary" />
 

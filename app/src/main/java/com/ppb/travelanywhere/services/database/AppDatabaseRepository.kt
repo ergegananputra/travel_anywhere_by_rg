@@ -33,7 +33,7 @@ class AppDatabaseRepository(
 
     suspend fun searchTrains(keyword: String): List<TrainsTable> {
         Log.d("AppDatabaseRepository", "searchTrains: $keyword")
-        return withContext(Dispatchers.IO) { trainsTableDao.search(keyword) }
+        return withContext(Dispatchers.IO) { trainsTableDao.search("%$keyword%") }
     }
 
     suspend fun getTrainById(id: String): TrainsTable {
@@ -77,7 +77,7 @@ class AppDatabaseRepository(
 
     suspend fun searchStations(keyword: String): List<StationsTable> {
         Log.d("AppDatabaseRepository", "searchStations: $keyword")
-        return withContext(Dispatchers.IO) { stationsTableDao.search(keyword) }
+        return withContext(Dispatchers.IO) { stationsTableDao.search("%$keyword%") }
     }
 
     suspend fun getStationById(id: String): StationsTable {
@@ -123,7 +123,7 @@ class AppDatabaseRepository(
 
     suspend fun searchTrainClasses(keyword: String): List<TrainClassesTable> {
         Log.d("AppDatabaseRepository", "searchTrainClasses: $keyword")
-        return withContext(Dispatchers.IO) { trainClassesTableDao.search(keyword) }
+        return withContext(Dispatchers.IO) { trainClassesTableDao.search("%$keyword%") }
     }
 
     suspend fun getTrainClassById(id: String): TrainClassesTable {
