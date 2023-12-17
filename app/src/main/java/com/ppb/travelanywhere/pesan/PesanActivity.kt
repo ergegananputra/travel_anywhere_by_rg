@@ -20,6 +20,7 @@ import androidx.lifecycle.asFlow
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ppb.travelanywhere.TravelAnywhereApps
+import com.ppb.travelanywhere.authenticate.WelcomeActivity
 import com.ppb.travelanywhere.databinding.ActivityPesanBinding
 import com.ppb.travelanywhere.dialog.GlobalSheetFragment
 import com.ppb.travelanywhere.dialog.adapter.GlobalTypeAdapter
@@ -193,8 +194,10 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
 
 
-                // Finish Activity
                 setResult(RESULT_OK)
+                val intentLogin = Intent(this@PesanActivity, WelcomeActivity::class.java)
+
+                startActivity(intentLogin)
                 finish()
 
             }

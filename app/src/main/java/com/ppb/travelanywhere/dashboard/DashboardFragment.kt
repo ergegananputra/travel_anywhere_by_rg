@@ -148,10 +148,12 @@ class DashboardFragment : Fragment() {
             }
 
             if (latestTrip != null) {
+                binding.textLatestTicket.visibility = View.VISIBLE
                 setUpCardLatestTrip(latestTrip)
             } else {
                 val tripCard = binding.containerLastTrip
                 tripCard.theCard.visibility = View.GONE
+                binding.textLatestTicket.visibility = View.GONE
             }
         }
     }
@@ -236,10 +238,12 @@ class DashboardFragment : Fragment() {
                 val upcomingTrip = appViewModel.upComingTicketHistory()
 
                 if (upcomingTrip != null) {
+                    binding.containerPromotion.cardViewPromotion.visibility = View.GONE
                     setUpCardUpcomingTrip(upcomingTrip)
                 } else {
                     val tripCard = binding.containerNextTrip
                     tripCard.theCard.visibility = View.GONE
+                    binding.containerPromotion.cardViewPromotion.visibility = View.VISIBLE
                 }
             }
         }
