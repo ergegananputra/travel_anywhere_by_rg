@@ -103,7 +103,7 @@ class ProfileFragment : Fragment() {
 
 
         binding.buttonImageViewDeleteAccount.setOnClickListener {
-            alertConfirmation(true)
+            alertConfirmation(true, "menghapus akun")
         }
 
         binding.buttonLogOut.setOnClickListener {
@@ -126,10 +126,10 @@ class ProfileFragment : Fragment() {
 
     }
 
-    private fun alertConfirmation(isDeleteAccountToo : Boolean = false) {
+    private fun alertConfirmation(isDeleteAccountToo : Boolean = false, msg : String = "keluar") {
         MaterialAlertDialogBuilder(requireContext(), R.style.CustomAlertDialog)
             .setTitle("Keluar")
-            .setMessage("Apakah Anda yakin ingin keluar?")
+            .setMessage("Apakah Anda yakin ingin $msg?")
             .setPositiveButton("Batal", null)
             .setNegativeButton("Ya") { _, _ ->
                 if (isDeleteAccountToo) {
