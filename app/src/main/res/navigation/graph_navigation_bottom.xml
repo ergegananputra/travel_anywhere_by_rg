@@ -16,26 +16,17 @@
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action
-            android:id="@+id/action_profileFragment_to_managerFragment"
-            app:destination="@id/managerFragment" />
+            android:id="@+id/action_profileFragment_to_adminManagerActivity"
+            app:destination="@id/adminManagerActivity" />
     </fragment>
     <fragment
         android:id="@+id/tripHistoryFragment"
         android:name="com.ppb.travelanywhere.history.TripHistoryFragment"
         android:label="fragment_trip_history"
         tools:layout="@layout/fragment_trip_history" />
-    <fragment
-        android:id="@+id/managerFragment"
-        android:name="com.ppb.travelanywhere.admin.ManagerFragment"
-        android:label="fragment_manager"
-        tools:layout="@layout/fragment_manager" >
-        <action
-            android:id="@+id/action_managerFragment_to_informationManagerFragment"
-            app:destination="@id/informationManagerFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/informationManagerFragment"
-        android:name="com.ppb.travelanywhere.admin.InformationManagerFragment"
-        android:label="fragment_information_manager"
-        tools:layout="@layout/fragment_information_manager" />
+    <activity
+        android:id="@+id/adminManagerActivity"
+        android:name="com.ppb.travelanywhere.admin.AdminManagerActivity"
+        android:label="activity_admin_manager"
+        tools:layout="@layout/activity_admin_manager" />
 </navigation>

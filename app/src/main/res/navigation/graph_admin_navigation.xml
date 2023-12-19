@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/graph_admin_navigation"
+    app:startDestination="@id/managerFragment">
+
+    <fragment
+        android:id="@+id/managerFragment"
+        android:name="com.ppb.travelanywhere.admin.ManagerFragment"
+        android:label="fragment_manager"
+        tools:layout="@layout/fragment_manager" >
+        <action
+            android:id="@+id/action_managerFragment_to_informationManagerFragment"
+            app:destination="@id/informationManagerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/informationManagerFragment"
+        android:name="com.ppb.travelanywhere.admin.InformationManagerFragment"
+        android:label="fragment_information_manager"
+        tools:layout="@layout/fragment_information_manager" />
+
+</navigation>

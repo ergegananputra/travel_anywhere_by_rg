@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
 
     <application
@@ -17,34 +17,32 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TravelAnywhere"
         tools:targetApi="31">
-
+        <activity
+            android:name=".admin.AdminManagerActivity"
+            android:exported="false" />
         <activity
             android:name=".authenticate.WelcomeActivity"
-            android:theme="@style/Theme.TravelAnywhere.NoCutOut"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.TravelAnywhere.NoCutOut">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".pesan.PesanActivity"
-            android:exported="true">
-        </activity>
-
+            android:exported="true"></activity>
         <activity
             android:name=".MainActivity"
-            android:resizeableActivity="true"
-            android:exported="true">
-        </activity>
+            android:exported="true"
+            android:resizeableActivity="true"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <receiver android:name=".services.notification.NotifReceiver"/>
+        <receiver android:name=".services.notification.NotifReceiver" />
     </application>
 
 </manifest>

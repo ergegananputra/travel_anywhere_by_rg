@@ -11,6 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        >
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="0dp"
@@ -23,10 +24,12 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingBottom="150dp">
+                android:paddingBottom="150dp"
+                android:id="@+id/constraint_layout_information_manager"
+                >
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/materialCardView5"
+                    android:id="@+id/material_card_view_information"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -151,7 +154,7 @@
                     android:src="@drawable/baseline_backspace_24"
                     android:tint="?attr/colorOnSecondaryContainer"
                     app:layout_constraintBottom_toBottomOf="@+id/button_pilih_tipe_database"
-                    app:layout_constraintEnd_toEndOf="@+id/materialCardView5"
+                    app:layout_constraintEnd_toEndOf="@+id/material_card_view_information"
                     app:layout_constraintTop_toTopOf="@+id/button_pilih_tipe_database" />
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -169,8 +172,8 @@
                     android:textAppearance="@style/TextAppearance.MyApp.TitleMedium"
                     android:textColor="?attr/colorOnPrimaryContainer"
                     app:layout_constraintEnd_toStartOf="@+id/button_reset"
-                    app:layout_constraintStart_toStartOf="@+id/materialCardView5"
-                    app:layout_constraintTop_toBottomOf="@+id/materialCardView5" />
+                    app:layout_constraintStart_toStartOf="@+id/material_card_view_information"
+                    app:layout_constraintTop_toBottomOf="@+id/material_card_view_information" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/button_simpan_data"

@@ -1,5 +1,6 @@
 package com.ppb.travelanywhere.pesan
 
+import android.animation.ObjectAnimator
 import android.app.AlarmManager
 import android.app.DatePickerDialog
 import android.app.PendingIntent
@@ -9,6 +10,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
+import android.view.View
 import android.view.WindowManager
 import android.widget.DatePicker
 import android.widget.Toast
@@ -93,10 +95,19 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
     private val selectedPaket = mutableListOf<PaketModel>()
 
+    private val tanggalAnimator by lazy {
+        ObjectAnimator.ofFloat(binding.buttonPilihTanggal, View.ALPHA, 0.5f, 1f).apply {
+            duration = 500
+            repeatCount = ObjectAnimator.INFINITE
+            repeatMode = ObjectAnimator.REVERSE
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        binding.appHeader.buttonBack.visibility = View.VISIBLE
         fetchDataAndSetupSpinner()
 
         val typedValue = TypedValue()
@@ -112,16 +123,25 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
 
         pilihTanggalKeberangkatan()
+        pilihKelasKeretaUI()
         setUpRecyclerPaket()
 
         observeDataForPrice()
         marqueeSupport()
 
+        binding.appHeader.buttonBack.setOnClickListener {
+            setResult(RESULT_CANCELED)
+            finish()
+        }
 
         // Check Out
         binding.buttonCheckout.setOnClickListener {
             if (selectedDate == null) {
                 Toast.makeText(this, "Pilih Tanggal Keberangkatan Terlebih Dahulu", Toast.LENGTH_SHORT).show()
+                binding.nestedScrollViewPesan.smoothScrollTo(0, binding.buttonPilihTanggal.top - 100)
+
+                tanggalAnimator.start()
+
                 return@setOnClickListener
             }
             if (stasiunKeberangkatanViewModel.data.value == null) {
@@ -167,8 +187,8 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
                 val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
                 val intent = Intent(this@PesanActivity, NotifReceiver::class.java).apply {
-                    putExtra("MESSAGE", "Keretamu akan berangkat tanggal ${binding.textViewTanggalKeberangkatan} ini. ${keretaViewModel.data.value!!.name} dari ${stasiunKeberangkatanViewModel.data.value!!.name} menuju ${stasiunKedatanganViewModel.data.value!!.name}")
-                    putExtra("TITLE", "Siapkan dirimu untuk Besok!")
+                    putExtra("MESSAGE", "Keretamu akan berangkat tanggal ${binding.textViewTanggalKeberangkatan.text} ini. ${keretaViewModel.data.value!!.name} dari ${stasiunKeberangkatanViewModel.data.value!!.name} menuju ${stasiunKedatanganViewModel.data.value!!.name}")
+                    putExtra("TITLE", "Siapkan dirimu!")
                 }
                 val pendingIntent = PendingIntent.getBroadcast(this@PesanActivity, 0, intent, PendingIntent.FLAG_MUTABLE)
 
@@ -190,15 +210,19 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
 
                 setResult(RESULT_OK)
-                val intentLogin = Intent(this@PesanActivity, WelcomeActivity::class.java)
-
-                startActivity(intentLogin)
                 finish()
 
             }
 
         }
 
+    }
+
+    private fun pilihKelasKeretaUI() {
+        binding.buttonPilihKelasKereta.visibility = android.view.View.GONE
+        keretaViewModel.data.observe(this) {
+            binding.buttonPilihKelasKereta.visibility = android.view.View.VISIBLE
+        }
     }
 
     private fun marqueeSupport() {
@@ -286,7 +310,7 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
     }
 
     private fun kereta(list: List<TrainsTable>) {
-        binding.textViewPilihanKereta.setOnClickListener {
+        binding.cardPilihKereta.setOnClickListener {
             if (GlobalSheetFragment.isDialogOpen) {
                 return@setOnClickListener
             }
@@ -320,6 +344,10 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
             }
 
             bottomSheet.show(supportFragmentManager, "TrainsSheetFragment")
+        }
+
+        binding.textViewPilihanKereta.setOnClickListener {
+            binding.cardPilihKereta.performClick()
         }
 
         keretaViewModel.data.observe(this) {
@@ -514,6 +542,8 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
     private fun pilihTanggalKeberangkatan() {
         binding.buttonPilihTanggal.setOnClickListener {
+            tanggalAnimator.cancel()
+            binding.buttonPilihTanggal.alpha = 1f
             val datePickerDialog = com.ppb.travelanywhere.dialog.DatePicker()
             datePickerDialog.show(supportFragmentManager, "DatePicker")
 

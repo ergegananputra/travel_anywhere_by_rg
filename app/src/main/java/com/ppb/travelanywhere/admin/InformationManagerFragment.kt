@@ -1,6 +1,7 @@
 package com.ppb.travelanywhere.admin
 
 import android.os.Bundle
+import android.text.TextUtils.split
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.transition.TransitionManager
 import com.ppb.travelanywhere.R
 import com.ppb.travelanywhere.TravelAnywhereApps
 import com.ppb.travelanywhere.databinding.FragmentInformationManagerBinding
@@ -22,7 +24,10 @@ import com.ppb.travelanywhere.services.database.DatabaseInformationManager
 import com.ppb.travelanywhere.services.database.stations.StationsTable
 import com.ppb.travelanywhere.services.database.train_classes.TrainClassesTable
 import com.ppb.travelanywhere.services.database.trains.TrainsTable
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class InformationManagerFragment : Fragment() {
@@ -51,6 +56,7 @@ class InformationManagerFragment : Fragment() {
         pilihTipeDatabase()
 
         setupSwipeRefresh()
+        informationCard()
 
         binding.buttonHapusData.setOnClickListener {
             deleteData()
@@ -75,11 +81,23 @@ class InformationManagerFragment : Fragment() {
         }
     }
 
+    private fun informationCard() {
+        binding.materialCardViewInformation.setOnClickListener {
+            TransitionManager.beginDelayedTransition(binding.constraintLayoutInformationManager)
+            if (binding.textViewManagerDescription.visibility == View.GONE) {
+                binding.textViewManagerDescription.visibility = View.VISIBLE
+            } else {
+                binding.textViewManagerDescription.visibility = View.GONE
+            }
+        }
+    }
+
     private fun setupSwipeRefresh() {
         binding.swipeRefreshLayoutInformationManager.setOnRefreshListener {
             lifecycleScope.launch {
                 updateData()
                 val currentQueue = appViewModel.countQueue()
+                Log.d("InformationManagerFragment", "setupSwipeRefresh: $currentQueue")
                 if (currentQueue > 0 ) {
                     val activity = requireActivity() as AppCompatActivity
                     val dBManager = DatabaseInformationManager(requireActivity(), requireActivity().application, activity)
@@ -257,23 +275,36 @@ class InformationManagerFragment : Fragment() {
                 return@launch
             }
 
+
+            val city = if (informationViewModel.getOption() == 1) {
+                val temp = binding.cityInputEditText.text.toString().trim().split(" ").joinToString(" ") { it -> it.replaceFirstChar { it.uppercase() }}
+                if (temp.startsWith("Stasiun") || temp.startsWith("Station") || temp.startsWith("St")) {
+                    temp
+                } else {
+                    "Stasiun $temp"
+                }
+            } else {
+                binding.cityInputEditText.text.toString().trim().split(" ").joinToString(" ") { it -> it.replaceFirstChar { it.uppercase() }}
+            }
+
             if (informationViewModel.isUpdate) {
+
                 appViewModel.insertQueue(
                     targetTable = binding.buttonPilihTipeDatabase.text.toString(),
                     targetAction = targetAction,
                     idTarget = informationViewModel.targetId!!,
-                    name = binding.nameInputEditText.text.toString(),
+                    name = binding.nameInputEditText.text.toString().trim().split(" ").joinToString(" ") { it -> it.replaceFirstChar { it.uppercase() }},
                     weight = binding.weightInputEditText.text.toString().toInt(),
-                    additionalData = binding.cityInputEditText.text.toString()
+                    additionalData = city
                 )
             } else {
                 appViewModel.insertQueue(
                     targetTable = binding.buttonPilihTipeDatabase.text.toString(),
                     targetAction = "insert",
                     idTarget = "",
-                    name = binding.nameInputEditText.text.toString(),
+                    name = binding.nameInputEditText.text.toString().trim().split(" ").joinToString(" ") { it -> it.replaceFirstChar { it.uppercase() }},
                     weight = binding.weightInputEditText.text.toString().toInt(),
-                    additionalData = binding.cityInputEditText.text.toString()
+                    additionalData = city
                 )
             }
 
@@ -282,11 +313,21 @@ class InformationManagerFragment : Fragment() {
 
             val activity = requireActivity() as AppCompatActivity
             val dBManager = DatabaseInformationManager(requireActivity(), requireActivity().application, activity)
-            dBManager.sendQueue()
-            currentQueue = appViewModel.countQueue()
-            binding.countLogTextView.text = currentQueue.toString()
 
+            dBManager.sendQueue()
             clearFields()
+
+            withContext(Dispatchers.IO) {
+                delay(5000L)
+                currentQueue = appViewModel.countQueue()
+                if (currentQueue == 0 ) {
+                    updateData()
+                }
+                withContext(Dispatchers.Main) {
+                    binding.countLogTextView.text = currentQueue.toString()
+                }
+            }
+
         }
     }
 

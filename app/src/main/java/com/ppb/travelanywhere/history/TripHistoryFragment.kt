@@ -32,9 +32,7 @@ class TripHistoryFragment : Fragment() {
     private val launcherToPesan = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             Log.d("TripHistoryFragment", "onActivityResult: RESULT_OK")
-
-            //TODO: Do something with the result
-
+            setupRecyclerView()
         } else if (result.resultCode == Activity.RESULT_CANCELED) {
             Log.d("TripHistoryFragment", "onActivityResult: RESULT_CANCELED")
         } else {

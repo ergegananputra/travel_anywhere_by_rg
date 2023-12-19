@@ -23,6 +23,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.ppb.travelanywhere.R
 import com.ppb.travelanywhere.SystemThemeViewModel
 import com.ppb.travelanywhere.TravelAnywhereApps
+import com.ppb.travelanywhere.authenticate.WelcomeActivity
 import com.ppb.travelanywhere.databinding.FragmentProfileBinding
 import com.ppb.travelanywhere.services.ApplicationPreferencesManager
 import com.ppb.travelanywhere.services.api.FireAuth
@@ -143,11 +144,11 @@ class ProfileFragment : Fragment() {
 
     private fun adminManager() {
         binding.containerKelolaAccount.setOnClickListener {
-            val action = ProfileFragmentDirections.actionProfileFragmentToManagerFragment()
+            val action = ProfileFragmentDirections.actionProfileFragmentToAdminManagerActivity()
             findNavController().navigate(action)
         }
         binding.buttonImageViewManagerAccount.setOnClickListener {
-            val action = ProfileFragmentDirections.actionProfileFragmentToManagerFragment()
+            val action = ProfileFragmentDirections.actionProfileFragmentToAdminManagerActivity()
             findNavController().navigate(action)
         }
     }
@@ -214,6 +215,10 @@ class ProfileFragment : Fragment() {
             ApplicationPreferencesManager(requireContext()).deleteUsername()
             appViewModel.deleteAllTicketHistory()
             appViewModel.deleteAllQueues()
+
+            val intentLogin = Intent(requireActivity(), WelcomeActivity::class.java)
+            startActivity(intentLogin)
+
             requireActivity().finish()
         }
 

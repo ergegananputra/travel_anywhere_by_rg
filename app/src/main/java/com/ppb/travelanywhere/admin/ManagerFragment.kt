@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.transition.TransitionManager
 import com.ppb.travelanywhere.adapter.UsersManagerAdapter
 import com.ppb.travelanywhere.databinding.FragmentManagerBinding
 import com.ppb.travelanywhere.services.api.FireAuth
@@ -42,7 +43,20 @@ class ManagerFragment : Fragment() {
         setupSearchBar()
         updateData()
 
+        informationCard()
+
         floatingButton()
+    }
+
+    private fun informationCard() {
+        binding.materialCardView5.setOnClickListener {
+            TransitionManager.beginDelayedTransition(binding.constraintLayoutManager)
+            if (binding.textViewManagerDescription.visibility == View.GONE) {
+                binding.textViewManagerDescription.visibility = View.VISIBLE
+            } else {
+                binding.textViewManagerDescription.visibility = View.GONE
+            }
+        }
     }
 
     private fun floatingButton() {

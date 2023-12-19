@@ -155,6 +155,7 @@ class DatabaseInformationManager(
                 }
             } else {
                 Log.e("DatabaseInformationManager", "Error deleting train class id : documents is empty")
+                appViewModel.deleteQueueById(q.id)
             }
         }.addOnFailureListener { exception ->
             Log.e("DatabaseInformationManager", "Error deleting train class :", exception)
@@ -172,6 +173,7 @@ class DatabaseInformationManager(
                 }
             } else {
                 Log.e("DatabaseInformationManager", "Error deleting train id : documents is empty")
+                appViewModel.deleteQueueById(q.id)
             }
         }.addOnFailureListener { exception ->
             Log.e("DatabaseInformationManager", "Error deleting train :", exception)
@@ -189,6 +191,7 @@ class DatabaseInformationManager(
                 }
             } else {
                 Log.e("DatabaseInformationManager", "Error deleting station id : documents is empty")
+                appViewModel.deleteQueueById(q.id)
             }
         }.addOnFailureListener { exception ->
             Log.e("DatabaseInformationManager", "Error deleting station :", exception)

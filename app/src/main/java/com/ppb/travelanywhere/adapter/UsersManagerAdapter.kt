@@ -1,5 +1,7 @@
 package com.ppb.travelanywhere.adapter
 
+import android.content.Context
+import android.preference.Preference
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -7,6 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ppb.travelanywhere.databinding.ItemUserBinding
+import com.ppb.travelanywhere.services.ApplicationPreferencesManager
 import com.ppb.travelanywhere.services.api.FireAuth
 import com.ppb.travelanywhere.services.model.User
 import kotlinx.coroutines.CoroutineScope
@@ -25,6 +28,10 @@ class UsersManagerAdapter(
                 buttonRole.text = user.role.removePrefix("Role_").lowercase()
                 buttonRole.setOnClickListener {
                     scope.launch {
+                        if (user.id == ApplicationPreferencesManager(binding.root.context).usernameId) {
+                            Toast.makeText(binding.root.context, "Tidak bisa mengubah role sendiri", Toast.LENGTH_SHORT).show()
+                            return@launch
+                        }
                         val newRole = FireAuth().updateUserRole(user.id, user.role)
                         user.role = newRole
                         buttonRole.text = newRole.removePrefix("Role_").lowercase()
@@ -45,6 +52,8 @@ class UsersManagerAdapter(
 
                     }
                 }
+
+
 
             }
         }

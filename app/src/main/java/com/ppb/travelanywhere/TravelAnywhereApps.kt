@@ -67,6 +67,7 @@ class TravelAnywhereApps : Application() {
                 .setSmallIcon(R.drawable.icon_travel_anywhere)
                 .setContentTitle(title)
                 .setContentText(message)
+                .setStyle(NotificationCompat.BigTextStyle().bigText(message))
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_REMINDER)
 

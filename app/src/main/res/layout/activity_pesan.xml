@@ -18,6 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_scroll_view_pesan"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fadingEdgeLength="24dp"
@@ -211,7 +212,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/materialCardView3" />
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/materialCardView4"
+                android:id="@+id/card_pilih_kereta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -232,14 +233,16 @@
                     <TextView
                         android:id="@+id/text_view_pilihan_kereta"
                         android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:gravity="center_vertical"
-                        android:maxLines="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginBottom="24dp"
                         android:ellipsize="marquee"
-                        android:marqueeRepeatLimit="marquee_forever"
-                        android:singleLine="true"
-                        android:text="Pilih Kereta"
                         android:freezesText="true"
+                        android:gravity="center_vertical"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="Klik Untuk Pilih Kereta"
                         android:textAppearance="@style/TextAppearance.MyApp.TitleMedium"
                         android:textColor="?attr/colorOnSurfaceVariant"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -252,19 +255,18 @@
                         android:id="@+id/button_pilih_kelas_kereta"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="16dp"
                         android:background="@drawable/rounded_rectangle"
                         android:backgroundTint="?attr/colorSurfaceContainerLow"
+                        android:ellipsize="marquee"
+                        android:freezesText="true"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:maxLines="1"
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
+                        android:singleLine="true"
                         android:text="Pilih Kelas"
                         android:textAllCaps="false"
-                        android:maxLines="1"
-                        android:freezesText="true"
-                        android:ellipsize="marquee"
-                        android:marqueeRepeatLimit="marquee_forever"
-                        android:singleLine="true"
+                        android:visibility="visible"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -283,7 +285,7 @@
                 android:textAppearance="@style/TextAppearance.MyApp.TitleLarge"
                 app:layout_constraintEnd_toEndOf="@+id/text_view_tanggal_keberangkatan"
                 app:layout_constraintStart_toStartOf="@+id/text_view_plih_kereta_label"
-                app:layout_constraintTop_toBottomOf="@+id/materialCardView4" />
+                app:layout_constraintTop_toBottomOf="@+id/card_pilih_kereta" />
 
             <TextView
                 android:id="@+id/textView10"
