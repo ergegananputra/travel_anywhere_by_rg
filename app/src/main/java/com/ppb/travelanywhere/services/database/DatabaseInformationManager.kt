@@ -314,6 +314,7 @@ class DatabaseInformationManager(
      */
     private fun updateTrainClassesDbVersion(trainClassesVers: String) {
         saveTrainClassesDbVersion(trainClassesVers)
+        appViewModel.deleteAllTrainClasses()
         Log.d("DatabaseInformationManager", "Train Classes get Version $trainClassesVers")
         fireConsole.trainsClassesRef.get(Source.SERVER).addOnSuccessListener {documents ->
             val trainClasses = documents.toObjects(TrainClasses::class.java)
@@ -332,6 +333,7 @@ class DatabaseInformationManager(
 
     private fun updateTrainsDbVersion(trainsVers: String) {
         saveTrainsDbVersion(trainsVers)
+        appViewModel.deleteAllTrains()
         Log.d("DatabaseInformationManager", "Trains get Version $trainsVers")
         fireConsole.trainsRef.get(Source.SERVER).addOnSuccessListener {documents ->
             val trains = documents.toObjects(Trains::class.java)

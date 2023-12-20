@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.ppb.travelanywhere.MainActivity
+import com.ppb.travelanywhere.dialog.WelcomeSheetFragment.Companion.viewPagerCompanion
 import com.ppb.travelanywhere.services.ApplicationPreferencesManager
 import com.ppb.travelanywhere.services.api.FireAuth
 import kotlinx.coroutines.Dispatchers
@@ -50,6 +51,10 @@ class LoginFragment : Fragment() {
                 }
             })
 
+        }
+
+        binding.textLinkRegister.setOnClickListener {
+            viewPagerCompanion?.currentItem = 0
         }
 
         binding.buttonLogin.setOnClickListener {

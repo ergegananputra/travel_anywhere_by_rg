@@ -75,6 +75,11 @@ class DashboardFragment : Fragment() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        setUsername()
+    }
+
     private fun setCalendarView() {
         binding.calendarView.setOnDateChangeListener { calendarView, year, month, dayOfMonts ->
             val calendar = Calendar.getInstance()
@@ -237,12 +242,16 @@ class DashboardFragment : Fragment() {
                 val upcomingTrip = appViewModel.upComingTicketHistory()
 
                 if (upcomingTrip != null) {
-                    binding.containerPromotion.cardViewPromotion.visibility = View.GONE
+                    this.launch(Dispatchers.Main) {
+                        binding.containerPromotion.cardViewPromotion.visibility = View.GONE
+                    }
                     setUpCardUpcomingTrip(upcomingTrip)
                 } else {
-                    val tripCard = binding.containerNextTrip
-                    tripCard.theCard.visibility = View.GONE
-                    binding.containerPromotion.cardViewPromotion.visibility = View.VISIBLE
+                    this.launch(Dispatchers.Main) {
+                        val tripCard = binding.containerNextTrip
+                        tripCard.theCard.visibility = View.GONE
+                        binding.containerPromotion.cardViewPromotion.visibility = View.VISIBLE
+                    }
                 }
             }
         }

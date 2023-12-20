@@ -219,9 +219,9 @@ class PesanActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
     }
 
     private fun pilihKelasKeretaUI() {
-        binding.buttonPilihKelasKereta.visibility = android.view.View.GONE
+        binding.buttonPilihKelasKereta.visibility = View.GONE
         keretaViewModel.data.observe(this) {
-            binding.buttonPilihKelasKereta.visibility = android.view.View.VISIBLE
+            binding.buttonPilihKelasKereta.visibility = View.VISIBLE
         }
     }
 
