@@ -6,6 +6,7 @@
         <item name="colorPrimaryDark">#303F9F</item>
         <item name="colorAccent">#FF4081</item>
         <item name="android:background">@drawable/rounded_rectangle</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
         <item name="buttonBarPositiveButtonStyle">@style/AlertDialogButtonStyleNegative</item>
         <item name="buttonBarNegativeButtonStyle">@style/AlertDialogButtonStyleLogOut</item>
     </style>
