@@ -11,6 +11,7 @@ import android.provider.Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM
 import android.util.Log
 import android.util.TypedValue
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
@@ -138,6 +139,8 @@ class WelcomeActivity : AppCompatActivity() {
                     alarmManager.canScheduleExactAlarms() -> {
                         Log.d("WelcomeActivity", "onCreate: Permission granted")
                         SCHEDULE_EXACT_ALARM_GRANTED = true
+                    } else -> {
+                        requestPermissionAlarm()
                     }
                 }
 
@@ -197,6 +200,8 @@ class WelcomeActivity : AppCompatActivity() {
                 dialog.dismiss()
             }
             .setNegativeButton("Exit") { dialog, _ ->
+                Toast.makeText(this, "Permission for Alarm is not granted. The App may not working properly", Toast.LENGTH_SHORT).show()
+                SCHEDULE_EXACT_ALARM_GRANTED = true
                 dialog.dismiss()
             }
             .create()
