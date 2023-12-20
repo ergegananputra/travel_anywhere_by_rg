@@ -17,7 +17,7 @@ class ApplicationPreferencesManager(context : Context) {
         get() = sharedPreferences.getString(SPID, null) != null
 
     val isUserAdmin : Boolean
-        get() = sharedPreferences.getString(SPROLE, null) == "Role_Admin"
+        get() = sharedPreferences.getString(SPROLE, null) == "Role_Admin" || sharedPreferences.getString(SPROLE, null) == "Role_Owner"
 
     val usernameName: String?
         get() = sharedPreferences.getString(SPNAME, null)

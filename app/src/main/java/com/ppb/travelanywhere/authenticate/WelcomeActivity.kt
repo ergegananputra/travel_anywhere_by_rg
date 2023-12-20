@@ -4,7 +4,6 @@ import android.Manifest
 import android.app.AlarmManager
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM
@@ -16,12 +15,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat.requestPermissions
-import androidx.core.app.ActivityCompat.shouldShowRequestPermissionRationale
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
 import androidx.core.content.getSystemService
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.snackbar.Snackbar
 import com.ppb.travelanywhere.MainActivity
 import com.ppb.travelanywhere.R
 import com.ppb.travelanywhere.databinding.ActivityWelcomeBinding
@@ -115,9 +112,9 @@ class WelcomeActivity : AppCompatActivity() {
                 requestPermissionNotification()
             }
 
-            val alarmManager = getSystemService<AlarmManager>()!!
+            val alarmManager = getSystemService<AlarmManager>()
             when {
-                alarmManager.canScheduleExactAlarms() -> {
+                alarmManager?.canScheduleExactAlarms() == true -> {
                     Log.d("WelcomeActivity", "onCreate: Permission granted")
                     SCHEDULE_EXACT_ALARM_GRANTED = true
                 }
@@ -134,13 +131,11 @@ class WelcomeActivity : AppCompatActivity() {
         binding.buttonStart.setOnClickListener {
             Log.d("WelcomeActivity", "onCreate: Checking permission, status : \nNotification : $POST_NOTIFICATIONS_GRANTED \nAlarm : $SCHEDULE_EXACT_ALARM_GRANTED" )
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                val alarmManager = getSystemService<AlarmManager>()!!
+                val alarmManager = getSystemService<AlarmManager>()
                 when {
-                    alarmManager.canScheduleExactAlarms() -> {
+                    alarmManager?.canScheduleExactAlarms() == true -> {
                         Log.d("WelcomeActivity", "onCreate: Permission granted")
                         SCHEDULE_EXACT_ALARM_GRANTED = true
-                    } else -> {
-                        requestPermissionAlarm()
                     }
                 }
 
@@ -160,30 +155,30 @@ class WelcomeActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.S)
     private fun requestPermissionAlarm() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.SCHEDULE_EXACT_ALARM) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, SCHEDULE_EXACT_ALARM_PERMISSION) == PackageManager.PERMISSION_GRANTED) {
             SCHEDULE_EXACT_ALARM_GRANTED = true
         } else {
-            if (shouldShowRequestPermissionRationale(Manifest.permission.SCHEDULE_EXACT_ALARM)) {
+            if (shouldShowRequestPermissionRationale(SCHEDULE_EXACT_ALARM_PERMISSION)) {
                 Log.d("WelcomeActivity", "requestPermissionAlarm: Should show request permission rationale")
             } else {
                 Log.d("WelcomeActivity", "requestPermissionAlarm: Should not show request permission rationale")
             }
-            launcherPermissionAlarmRequest.launch(Manifest.permission.SCHEDULE_EXACT_ALARM)
+            launcherPermissionAlarmRequest.launch(SCHEDULE_EXACT_ALARM_PERMISSION)
         }
     }
 
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun requestPermissionNotification() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, POST_NOTIFICATIONS_PERMISSION) == PackageManager.PERMISSION_GRANTED) {
             POST_NOTIFICATIONS_GRANTED = true
         } else {
-            if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
+            if (shouldShowRequestPermissionRationale(POST_NOTIFICATIONS_PERMISSION)) {
                 Log.d("WelcomeActivity", "requestPermissionNotification: Should show request permission rationale")
             } else {
                 Log.d("WelcomeActivity", "requestPermissionNotification: Should not show request permission rationale")
             }
-            launcherPermissionNotificationRequest.launch(Manifest.permission.POST_NOTIFICATIONS)
+            launcherPermissionNotificationRequest.launch(POST_NOTIFICATIONS_PERMISSION)
         }
     }
 
@@ -200,7 +195,9 @@ class WelcomeActivity : AppCompatActivity() {
                 dialog.dismiss()
             }
             .setNegativeButton("Exit") { dialog, _ ->
-                Toast.makeText(this, "Permission for Alarm is not granted. The App may not working properly", Toast.LENGTH_SHORT).show()
+                // SnackBar Warning
+                Snackbar.make(binding.root, "Permission for Alarm is not granted. The App may not working properly", Snackbar.LENGTH_INDEFINITE).show()
+
                 SCHEDULE_EXACT_ALARM_GRANTED = true
                 dialog.dismiss()
             }

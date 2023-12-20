@@ -110,6 +110,7 @@ class FireAuth : FireConsole() {
     }
 
     suspend fun updateUserRole(id: String, currRole: String) : String {
+        if (currRole != roleUser && currRole != roleAdmin) return currRole
         val newRole = if (currRole == roleUser) roleAdmin else roleUser
         return suspendCoroutine { continuation ->
             usersRef.document(id).update(field_role, newRole)
