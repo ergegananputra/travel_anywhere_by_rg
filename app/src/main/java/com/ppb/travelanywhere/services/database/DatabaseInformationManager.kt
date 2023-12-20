@@ -5,7 +5,6 @@ import android.content.Context
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.Source
 import com.ppb.travelanywhere.TravelAnywhereApps
 import com.ppb.travelanywhere.services.api.FireConsole

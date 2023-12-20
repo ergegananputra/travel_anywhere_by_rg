@@ -1,13 +1,11 @@
 package com.ppb.travelanywhere.admin
 
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.WindowManager
-import com.ppb.travelanywhere.R
+import androidx.appcompat.app.AppCompatActivity
 import com.ppb.travelanywhere.databinding.ActivityAdminManagerBinding
-import com.ppb.travelanywhere.databinding.FragmentManagerBinding
 
 class AdminManagerActivity : AppCompatActivity() {
     private val binding by lazy {

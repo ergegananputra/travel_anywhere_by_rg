@@ -1,7 +1,5 @@
 package com.ppb.travelanywhere.adapter
 
-import android.content.Context
-import android.preference.Preference
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -32,6 +30,10 @@ class UsersManagerAdapter(
                             Toast.makeText(binding.root.context, "Tidak bisa mengubah role sendiri", Toast.LENGTH_SHORT).show()
                             return@launch
                         }
+                        if (user.role == "Role_Owner") {
+                            Toast.makeText(binding.root.context, "Tidak memiliki hak mengubah role owner", Toast.LENGTH_SHORT).show()
+                            return@launch
+                        }
                         val newRole = FireAuth().updateUserRole(user.id, user.role)
                         user.role = newRole
                         buttonRole.text = newRole.removePrefix("Role_").lowercase()
@@ -39,6 +41,14 @@ class UsersManagerAdapter(
                 }
                 buttonDeleteUser.setOnClickListener {
                     scope.launch {
+                        if (user.id == ApplicationPreferencesManager(binding.root.context).usernameId) {
+                            Toast.makeText(binding.root.context, "Mohon menghapus diri Anda melalui profil untuk memastikan", Toast.LENGTH_LONG).show()
+                            return@launch
+                        }
+                        if (user.role == "Role_Owner") {
+                            Toast.makeText(binding.root.context, "Tidak memiliki hak mengubah role owner", Toast.LENGTH_SHORT).show()
+                            return@launch
+                        }
                         val result = FireAuth().deleteUser(user.id)
                         if (result) {
                             val position = currentList.indexOf(user)

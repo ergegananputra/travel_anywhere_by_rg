@@ -1,6 +1,5 @@
 package com.ppb.travelanywhere.services.database
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.ppb.travelanywhere.services.database.queue.DbQueueTable
 import com.ppb.travelanywhere.services.database.stations.StationsTable
